@@ -10,7 +10,7 @@
 >>>>>>> fc6dcbaa78c304d489c1d9c29234e97238026cd6
 *~.txt
 *.txt
-
+*.iml
 *DataFiles/
 =======
 # .v4p backup files
