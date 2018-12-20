@@ -1,23 +1,29 @@
-# Compiled class file
-*.class
+<<<<<<< HEAD
 
-# Log file
-*.log
+# .v4p backup files
+*~.XML
+*.XML
+<<<<<<< HEAD
+=======
+*~.xml
+*.xml
+>>>>>>> fc6dcbaa78c304d489c1d9c29234e97238026cd6
+*~.txt
+*.txt
 
-# BlueJ files
-*.ctxt
+*DataFiles/
+=======
+# .v4p backup files
+>>>>>>> XMLrepositories
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Dynamic plugins .dll
+bin/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+*.idea
+.idea/
+.idea/workspace.xml
+<<<<<<< HEAD
+workspace.xml
+=======
+workspace.xml
+>>>>>>> XMLrepositories
