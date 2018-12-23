@@ -1,22 +1,24 @@
 package Domain;
 
-public class Grade implements IdEntity<Integer>{
+public class Grade implements IdEntity<String>{
 
     private String studentId;
     private int homeworkId;
-    private int id;
+    private String id;
     private double grade;
 
     private int studGroup;
     private String studTeacher;
     private String studName;
+    private String feedback;
 
 
-    public Grade(String studentId, int homeworkId, int id, double grade){
+    public Grade(String studentId, int homeworkId, double grade, String feedback){
         this.studentId = studentId;
         this.homeworkId = homeworkId;
-        this.id = id;
+        this.id = "" + studentId + homeworkId;
         this.grade = grade;
+        this.feedback = feedback;
     }
 
     public String getStudId() {
@@ -35,9 +37,7 @@ public class Grade implements IdEntity<Integer>{
         this.homeworkId = homeworkId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public double getGrade() {
         return grade;
@@ -47,13 +47,15 @@ public class Grade implements IdEntity<Integer>{
         this.grade = grade;
     }
 
+
+
     @Override
-    public void setId(Integer integer) {
-        this.id = id;
+    public void setId(String s) {
+        this.id = s;
     }
 
     @Override
-    public Integer getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -83,4 +85,11 @@ public class Grade implements IdEntity<Integer>{
     }
 
 
+    public String getFeedback() {
+        return this.feedback;
+    }
+
+    public void setFeedback(String feedback){
+        this.feedback = feedback;
+    }
 }
