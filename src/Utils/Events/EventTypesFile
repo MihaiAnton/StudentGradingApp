@@ -1,0 +1,10 @@
+The events that can happen inside the service
+divide into the following categories:
+    - student
+    - homework
+    - grade
+
+    Each of these divide into the following actions:
+        - add
+        - update
+        - delete
