@@ -11,7 +11,7 @@ public class MainController {
 
     private TeacherService teacherService;
 
-    private Stage studentStage, homeworkStage, raportStage;
+    private Stage studentStage, homeworkStage, gradesStage;
 
     public void setServices(TeacherService teacherService){
 
@@ -38,22 +38,26 @@ public class MainController {
 
                 //homework stage init
                 this.homeworkStage = new Stage();
-                FXMLLoader loaderrRight = new FXMLLoader(getClass().getResource("HomeworkFXMLView.fxml"));
-                Pane rightPane =  loaderrRight.load();
-                HomeworkViewController homeworkViewController = loaderrRight.getController();
+                FXMLLoader loaderRight = new FXMLLoader(getClass().getResource("HomeworkFXMLView.fxml"));
+                Pane rightPane =  loaderRight.load();
+                HomeworkViewController homeworkViewController = loaderRight.getController();
                 homeworkViewController.setService(teacherService);
                 homeworkStage.setScene(new Scene(rightPane));
 
             }catch(Exception e){}
-/*
-            //raport stage init
-            this.raportStage = new Stage();
-            FXMLLoader loaderRaport = new FXMLLoader(getClass().getResource("RaportTemplateView.fxml"));
-            Pane raportPane = (Pane) loaderRaport.load();
-            this.raportController = loaderRaport.getController();
-            raportController.setService(service);
-            raportStage.setScene(new Scene(raportPane));
-*/
+
+            try {
+                //grades stage init
+                this.gradesStage = new Stage();
+                FXMLLoader loaderGrades = new FXMLLoader(getClass().getResource("GradesFXMLView.fxml"));
+                Pane gradePane =  loaderGrades.load();
+                GradesViewController gradesViewController = loaderGrades.getController();
+                gradesViewController.setService(teacherService);
+                gradesStage.setScene(new Scene(gradePane));
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+            }
         }
         catch(Exception e){}
     }
@@ -69,7 +73,10 @@ public class MainController {
     }
 
     @FXML
-    public void openRaportScene(){raportStage.show();}
+    public void openGradesScene(){
+        gradesStage.show();
+    }
+
 
 
 }
