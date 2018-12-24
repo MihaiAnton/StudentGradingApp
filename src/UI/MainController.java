@@ -4,14 +4,27 @@ import Service.TeacherService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+//'file:M:\School\Metode Avansate de Programare\StudentGradingApp\src\UI\Backgrounds\download.jpg'
+
 
 public class MainController {
 
     private TeacherService teacherService;
-
     private Stage studentStage, homeworkStage, gradesStage;
+
+    private Stage thisStage;
+
+    public void setStage(Stage stage){
+        this.thisStage = stage;
+    }
+
+    public void quitStage(){
+        this.thisStage.close();
+    }
 
     public void setServices(TeacherService teacherService){
 
@@ -31,6 +44,7 @@ public class MainController {
                 StudentViewController studentViewController = loaderLeft.getController();
                 studentViewController.setService(this.teacherService);
                 studentStage.setScene(new Scene(leftPane));
+                studentViewController.setStage(studentStage);
 
             }catch(Exception e){}
 
@@ -43,6 +57,7 @@ public class MainController {
                 HomeworkViewController homeworkViewController = loaderRight.getController();
                 homeworkViewController.setService(teacherService);
                 homeworkStage.setScene(new Scene(rightPane));
+                homeworkViewController.setStage(homeworkStage);
 
             }catch(Exception e){}
 
@@ -54,6 +69,7 @@ public class MainController {
                 GradesViewController gradesViewController = loaderGrades.getController();
                 gradesViewController.setService(teacherService);
                 gradesStage.setScene(new Scene(gradePane));
+                gradesViewController.setStage(gradesStage);
             }
             catch(Exception e){
                 System.out.println(e.getMessage());
@@ -78,5 +94,7 @@ public class MainController {
     }
 
 
-
+    public void handleExit(MouseEvent mouseEvent) {
+        this.quitStage();
+    }
 }

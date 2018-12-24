@@ -1,0 +1,7 @@
+.anchor {
+    -fx-background-image:url('Backgrounds/mainWallpaper.jpg');
+}
+
+.anchorSubMenu{
+    -fx-background-image:url('Backgrounds/wallpaper4.jpg');
+}

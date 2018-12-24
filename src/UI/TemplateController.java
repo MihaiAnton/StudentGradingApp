@@ -9,11 +9,24 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 
 public abstract class TemplateController<E> implements Observer<ServiceEvent> {
 
     @FXML
     protected TableView<E> table;
+
+    private Stage thisStage;
+
+    public void setStage(Stage stage){
+        this.thisStage = stage;
+    }
+
+    @FXML
+    public void quitStage(){
+        this.thisStage.close();
+    }
+
 
 
     protected TeacherService service;
