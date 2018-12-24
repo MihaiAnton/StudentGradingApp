@@ -34,10 +34,15 @@ public class GradesViewController extends TemplateController<Grade>{
     }
 
     private void setChoices() {
+        Set<Integer> hids = new HashSet<>();
         homeworkCB.getItems().clear();
 
-        for(Homework h: service.getHomeworkIterable()){
-            homeworkCB.getItems().add("" + h.getId());
+        for(Grade grade: service.getAllGrades()){
+            hids.add(grade.getHomeworkId());
+        }
+
+        for (Integer id:hids   ) {
+            homeworkCB.getItems().add("" + id);
         }
 
         homeworkCB.getItems().add("None");
@@ -84,7 +89,8 @@ public class GradesViewController extends TemplateController<Grade>{
 
     @Override
     public void notify(ServiceEvent event) {
-
+        setDefaultValues();
+        handleFilter();
     }
 
     @FXML

@@ -17,6 +17,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class Main extends Application {
@@ -36,6 +37,9 @@ public class Main extends Application {
         primaryStage.setScene(mainScene);
 
         controller.setStage(primaryStage);
+
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+
 
         primaryStage.show();
     }

@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 //'file:M:\School\Metode Avansate de Programare\StudentGradingApp\src\UI\Backgrounds\download.jpg'
 
@@ -45,6 +46,7 @@ public class MainController {
                 studentViewController.setService(this.teacherService);
                 studentStage.setScene(new Scene(leftPane));
                 studentViewController.setStage(studentStage);
+                studentStage.initStyle(StageStyle.UNDECORATED);
 
             }catch(Exception e){}
 
@@ -58,6 +60,7 @@ public class MainController {
                 homeworkViewController.setService(teacherService);
                 homeworkStage.setScene(new Scene(rightPane));
                 homeworkViewController.setStage(homeworkStage);
+                homeworkStage.initStyle(StageStyle.UNDECORATED);
 
             }catch(Exception e){}
 
@@ -70,6 +73,7 @@ public class MainController {
                 gradesViewController.setService(teacherService);
                 gradesStage.setScene(new Scene(gradePane));
                 gradesViewController.setStage(gradesStage);
+                gradesStage.initStyle(StageStyle.UNDECORATED);
             }
             catch(Exception e){
                 System.out.println(e.getMessage());

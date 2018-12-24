@@ -192,7 +192,7 @@ public class StudentViewController extends TemplateController<Student>{
                 }
                 else{
                     try{
-                        if(service.findGrade(s, hid) != null){
+                        if(service.findGrade(student.getId(), hid) != null){
                             throw new Exception("Grade already exists.");
                         }
                         else {
