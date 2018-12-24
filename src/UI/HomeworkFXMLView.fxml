@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.HomeworkViewController">
+    <children>
+        <TableView fx:id="table" layoutX="9.0" layoutY="16.0" prefHeight="472.0" prefWidth="497.0">
+            <columns>
+                <TableColumn prefWidth="58.0" text="Id">
+                    <cellValueFactory><PropertyValueFactory property="id" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="182.0" text="Description">
+                    <cellValueFactory><PropertyValueFactory property="description" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="121.0" text="Target Week">
+                    <cellValueFactory><PropertyValueFactory property="targetWeek" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="135.0" text="Deadline Week">
+                    <cellValueFactory><PropertyValueFactory property="deadlineWeek" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <Text fill="#3b69a4" layoutX="528.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Homework Menu" textAlignment="CENTER" wrappingWidth="227.13671875">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <VBox layoutX="542.0" layoutY="99.0" prefHeight="200.0" prefWidth="85.0">
+            <children>
+                <Label prefHeight="35.0" prefWidth="88.0" text="Id:" textAlignment="CENTER" />
+                <Label prefHeight="40.0" prefWidth="90.0" text="Description:" />
+                <Label prefHeight="42.0" prefWidth="91.0" text="Target week:" />
+                <Label prefHeight="41.0" prefWidth="95.0" text="Deadline week:" />
+            </children>
+        </VBox>
+        <VBox layoutX="653.0" layoutY="99.0" prefHeight="200.0" prefWidth="122.0">
+            <children>
+                <TextField fx:id="tid" prefHeight="25.0" prefWidth="119.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="115.13671875" />
+                <TextField fx:id="tdesc" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="116.13671875" />
+                <TextField fx:id="ttrgWeek" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.13671875" />
+                <TextField fx:id="tddlWeek" />
+            </children>
+        </VBox>
+        <HBox layoutX="542.0" layoutY="317.0" prefHeight="25.0" prefWidth="200.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="52.0" text="Add" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
+                <Button mnemonicParsing="false" onAction="#handleUpdate" prefHeight="25.0" prefWidth="59.0" text="Update" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
+                <Button mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
+            </children>
+        </HBox>
+        <Button layoutX="542.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="31.0" prefWidth="85.0" text="Clear" />
+    </children>
+</AnchorPane>
