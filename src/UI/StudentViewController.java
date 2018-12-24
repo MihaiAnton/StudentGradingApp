@@ -117,6 +117,10 @@ public class StudentViewController extends TemplateController<Student>{
 
     @Override
     public void notify(ServiceEvent event) {
+        if(!event.getEventType().equals("student")) {
+            return;
+        }
+
         Student s = (Student)event.getEntity().getEntity();
 
         if(event.getEntity().getEventType().equals("add")){

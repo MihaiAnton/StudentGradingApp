@@ -11,7 +11,7 @@ public class MainController {
 
     private TeacherService teacherService;
 
-    private Stage leftStage, rightStage, raportStage;
+    private Stage studentStage, homeworkStage, raportStage;
 
     public void setServices(TeacherService teacherService){
 
@@ -23,25 +23,29 @@ public class MainController {
 
         try {
             try {
-                //left stage init
-                this.leftStage = new Stage();
+
+                //student stage init
+                this.studentStage = new Stage();
                 FXMLLoader loaderLeft = new FXMLLoader(getClass().getResource("StudentsFXMLView.fxml"));
-                Pane leftPane = (Pane) loaderLeft.load();
+                Pane leftPane = loaderLeft.load();
                 StudentViewController studentViewController = loaderLeft.getController();
                 studentViewController.setService(this.teacherService);
-                leftStage.setScene(new Scene(leftPane));
-            }catch(Exception e){}
-/*
-            try{
-                //right stage init
-                this.rightStage = new Stage();
-                FXMLLoader loaderrRight = new FXMLLoader(getClass().getResource("FilterTemplateView.fxml"));
-                Pane rightPane = (Pane) loaderrRight.load();
-                filterTestController = loaderrRight.getController();
-                filterTestController.setService(this.service);
-                rightStage.setScene(new Scene(rightPane));
+                studentStage.setScene(new Scene(leftPane));
+
             }catch(Exception e){}
 
+            try{
+
+                //homework stage init
+                this.homeworkStage = new Stage();
+                FXMLLoader loaderrRight = new FXMLLoader(getClass().getResource("HomeworkFXMLView.fxml"));
+                Pane rightPane =  loaderrRight.load();
+                HomeworkViewController homeworkViewController = loaderrRight.getController();
+                homeworkViewController.setService(teacherService);
+                homeworkStage.setScene(new Scene(rightPane));
+
+            }catch(Exception e){}
+/*
             //raport stage init
             this.raportStage = new Stage();
             FXMLLoader loaderRaport = new FXMLLoader(getClass().getResource("RaportTemplateView.fxml"));
@@ -56,12 +60,12 @@ public class MainController {
 
     @FXML
     public void openStudentScene(){
-        leftStage.show();
+        studentStage.show();
     }
 
     @FXML
-    public void openRightScene(){
-        rightStage.show();
+    public void openHomeworkScene(){
+        homeworkStage.show();
     }
 
     @FXML

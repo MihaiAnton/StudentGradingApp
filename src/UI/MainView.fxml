@@ -5,7 +5,7 @@
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.MainController">
     <children>
         <Button onAction="#openStudentScene" layoutX="86.0" layoutY="126.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="177.0" text="Student menu" />
-        <Button layoutX="335.0" layoutY="126.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="177.0" />
+        <Button onAction="#openHomeworkScene" text="Homework menu" layoutX="335.0" layoutY="126.0" mnemonicParsing="false" prefHeight="120.0" prefWidth="177.0" />
         <Button layoutX="245.0" layoutY="295.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="114.0" />
     </children>
 </AnchorPane>
