@@ -11,7 +11,10 @@
 *~.txt
 *.txt
 
+*DataFiles/*.
 *DataFiles/
+*out/
+*out/
 =======
 # .v4p backup files
 >>>>>>> XMLrepositories

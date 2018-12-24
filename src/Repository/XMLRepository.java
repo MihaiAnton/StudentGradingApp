@@ -64,7 +64,7 @@ public abstract class XMLRepository<ID, E extends IdEntity<ID>> extends StorageR
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
             Document document = documentBuilder.newDocument();
 
-            Element root = document.createElement(entity);
+            Element root = document.createElement(entity + "List");
 
             for (Object object : findAll()) {
 

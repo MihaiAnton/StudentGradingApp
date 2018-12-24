@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.GradesViewController">
+    <children>
+        <TableView fx:id="table" layoutX="17.0" layoutY="19.0" prefHeight="473.0" prefWidth="532.0">
+            <columns>
+                <TableColumn prefWidth="86.0" text="Student ID">
+                    <cellValueFactory><PropertyValueFactory property="studId" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="108.0" text="Homework ID">
+                    <cellValueFactory><PropertyValueFactory property="homeworkId" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="105.0" text="Name">
+                    <cellValueFactory><PropertyValueFactory property="studName" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="60.0" text="Group">
+                    <cellValueFactory><PropertyValueFactory property="studGroup" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="65.0" text="Grade">
+                    <cellValueFactory><PropertyValueFactory property="grade" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="105.0" text="Teacher">
+                    <cellValueFactory><PropertyValueFactory property="studTeacher" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <Text layoutX="602.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grades Menu" wrappingWidth="158.13671875">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <VBox layoutX="566.0" layoutY="102.0" prefHeight="147.0" prefWidth="100.0">
+            <children>
+                <Label prefHeight="26.0" prefWidth="100.0" text="Student ID:" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                <Label prefHeight="28.0" prefWidth="98.0" text="Homework ID:" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                <Label prefHeight="27.0" prefWidth="72.0" text="Group:" />
+            </children>
+        </VBox>
+        <VBox layoutX="681.0" layoutY="102.0" prefHeight="147.0" prefWidth="100.0">
+            <children>
+                <TextField fx:id="studentId"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                <ChoiceBox fx:id="homeworkCB" prefWidth="150.0" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+                <ChoiceBox fx:id="groupCB" prefWidth="150.0" />
+            </children></VBox>
+        <HBox layoutX="572.0" layoutY="308.0" prefHeight="44.0" prefWidth="198.0">
+            <children>
+                <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="85.0" text="Filter" onAction="#handleFilter"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="31.13671875" />
+                <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="83.0" text="Clear" onAction="#handleClear"/>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
