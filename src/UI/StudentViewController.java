@@ -7,6 +7,8 @@ import Utils.Events.ServiceEvent;
 import Utils.Events.StudentEvent;
 import Validators.StudentValidator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 public class StudentViewController extends TemplateController<Student>{
@@ -14,6 +16,12 @@ public class StudentViewController extends TemplateController<Student>{
 
     @FXML
     TextField id, name, group, mail, teacher;
+
+    @FXML
+    RadioButton missingReason;
+
+    @FXML
+    TextField students, hid, week, fback, grade;
 
 
     @FXML
@@ -144,4 +152,105 @@ public class StudentViewController extends TemplateController<Student>{
             }
         }
     }
+
+    @FXML
+    public void handleGrade(){
+        try {
+            Double gr = Double.parseDouble(grade.getText());
+            int week = Integer.parseInt(this.week.getText());
+            String feedback = fback.getText();
+            int hid = Integer.parseInt(this.hid.getText());
+            String students = this.students.getText();
+
+            if (service.findHomework(hid) == null) {
+                throw new ValidationException("Inexistent Homework.");
+            }
+
+            if (week < 0 || week > 14) {
+                throw new ValidationException("Incorrect week value.");
+            }
+
+            if(gr < 1 || gr > 10){
+                throw new ValidationException("Incorrect grade value.");
+            }
+
+            if (missingReason.isSelected()) {
+                week = service.findHomework(hid).getTargetWeek();
+            }
+
+            service.findHomework(hid).setAssignmentWeek(week);
+            service.findHomework(hid).setGrade(gr);
+            gr = service.findHomework(hid).getGrade();
+
+            String[] sIds = students.split(",");
+
+            for (String s : sIds) {
+                Student student = searchStudent(s);
+                if (student == null) {
+
+                    gradeConfirmation("Can't find student " + s + ".");
+                }
+                else{
+                    try{
+                        if(service.findGrade(s, hid) != null){
+                            throw new Exception("Grade already exists.");
+                        }
+                        else {
+
+                            service.assignGrade(student.getId(), hid, gr, week, feedback);
+                            gradeConfirmation("Student " + student.getName() + " graded " + gr + " at homework " + hid + ".");
+                        }
+                    }
+                    catch (Exception e){
+                        gradeConfirmation(e.getMessage());
+                    }
+                }
+            }
+        }
+        catch(ValidationException ve){
+            handleError("Invalid data: " + "\n" + ve.getMessage());
+        }
+        catch(Exception e){
+            handleError("Error grading.");
+        }
+    }
+
+    private Student searchStudent(String s) {
+
+        for(Student st:service.getStudents()){
+            if(s.equals(st.getId()) || st.getName().matches(s + ".*")){
+                return st;
+            }
+        }
+        return null;
+    }
+
+    public void gradeConfirmation(String text){
+        Alert msg = new Alert(Alert.AlertType.CONFIRMATION);
+        msg.setTitle("Grade confirmation.");
+        msg.setContentText(text);
+        msg.showAndWait();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -46,8 +46,8 @@ public class GradesViewController extends TemplateController<Grade>{
 
         Set<Integer> groups = new HashSet<>();
 
-        for(Student s:service.getStudents()){
-            groups.add(s.getGroup());
+        for(Grade g:service.getAllGrades()){
+            groups.add(service.findStudent(g.getStudId()).getGroup());
         }
 
         for(int group:groups){
@@ -99,7 +99,7 @@ public class GradesViewController extends TemplateController<Grade>{
         //homework id
         ArrayList<Grade> filtered1 = new ArrayList<>();
         for (Grade g: list) {
-            if(homeworkCB.getValue().equals("None") || homeworkCB.getValue().equals(g.getHomeworkId())){
+            if(homeworkCB.getValue().equals("None") || homeworkCB.getValue().equals(""+g.getHomeworkId())){
                 filtered1.add(g);
             }
         }
@@ -117,7 +117,7 @@ public class GradesViewController extends TemplateController<Grade>{
         //group
         ArrayList<Grade> filtered3 = new ArrayList<>();
         for (Grade g: filtered2) {
-            if(groupCB.getValue().equals("None") || groupCB.getValue().equals(g.getStudGroup())){
+            if(groupCB.getValue().equals("None") || groupCB.getValue().equals(""+g.getStudGroup())){
                 filtered3.add(g);
             }
         }

@@ -25,7 +25,7 @@ public class TeacherService implements Observable<ServiceEvent> {
     private GenericHashMapRepository<Integer, Homework> homeworkRepo;
     private GenericHashMapRepository<String, Grade> gradeRepo;
 
-    private String studentsPath = "M:\\School\\Metode Avansate de Programare\\StudentGradingApp\\src\\DataFiles\\Students";
+    private String studentsPath = "M:\\School\\Metode Avansate de Programare\\StudentGradingApp\\src\\DataFiles\\Students\\";
     ArrayList<Observer> observers;
 
     public TeacherService(GenericHashMapRepository<String, Student> sRepo,
@@ -241,14 +241,14 @@ public class TeacherService implements Observable<ServiceEvent> {
                 assignmentWeek = h.getAssignmentWeek();
             }
 
-            h.setAssignmentWeek(assignmentWeek);
-            h.setGrade(grade);
-            Grade grade1 = new Grade(studentId, homeworkId, h.getGrade(), "");
+            //h.setAssignmentWeek(assignmentWeek);
+            //h.setGrade(grade);
+            Grade grade1 = new Grade(studentId, homeworkId, h.getGrade(), feedback);
             gradeRepo.save(grade1);
 
             // Print assignment
             String filePath = studentsPath + student.getId() + ".txt";
-            String text = "Tema: " + h.getId() + "\nPredata in saptamana: " + h.getAssignmentWeek() + "\nDeadline: " + h.getDeadlineWeek() + "\nFeedback: " + feedback + "\n\n";
+            String text = "Homework: " + h.getId() + "\nAssigned in week: " + h.getAssignmentWeek() + "\nDeadline: " + h.getDeadlineWeek() + "\nFeedback: " + feedback + "\n\n";
 
             File f = new File(filePath);
             try{f.createNewFile();}
@@ -388,6 +388,10 @@ o ”Feedback:” aprecieri, sugestii, precizări în legătură cu depunctăril
         for (Observer obs:this.observers       ) {
             obs.notify(event);
         }
+    }
+
+    public Grade findGrade(String s, int hid) {
+        return gradeRepo.findOne(s+hid);
     }
 }
 

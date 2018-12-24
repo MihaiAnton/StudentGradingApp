@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.*?>
+
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.StudentViewController">
     <children>
         <TableView fx:id="table" layoutX="4.0" layoutY="71.0" prefHeight="425.0" prefWidth="462.0">
@@ -39,7 +42,7 @@
                 <Font size="25.0" />
             </font>
         </Text>
-        <VBox layoutX="500.0" layoutY="71.0" prefHeight="235.0" prefWidth="85.0">
+        <VBox layoutX="498.0" layoutY="46.0" prefHeight="235.0" prefWidth="85.0">
             <children>
                 <Label prefHeight="35.0" prefWidth="88.0" text="Id:" textAlignment="CENTER" />
                 <Label prefHeight="40.0" prefWidth="90.0" text="Name:" />
@@ -48,7 +51,7 @@
                 <Label prefHeight="30.0" prefWidth="85.0" text="Teacher:" />
             </children>
         </VBox>
-        <VBox layoutX="617.0" layoutY="71.0" prefHeight="235.0" prefWidth="151.0">
+        <VBox layoutX="617.0" layoutY="46.0" prefHeight="235.0" prefWidth="151.0">
             <children>
                 <TextField fx:id="id" prefHeight="25.0" prefWidth="119.0" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="115.13671875" />
@@ -61,15 +64,49 @@
                 <TextField fx:id="teacher" />
             </children>
         </VBox>
-        <HBox layoutX="504.0" layoutY="337.0" prefHeight="31.0" prefWidth="274.0">
+        <HBox layoutX="482.0" layoutY="250.0" prefHeight="31.0" prefWidth="296.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleAdd" prefHeight="31.0" prefWidth="78.0" text="Add" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
-                <Button mnemonicParsing="false" onAction="#handleUpdate" prefHeight="31.0" prefWidth="84.0" text="Update" />
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="22.0" />
-                <Button mnemonicParsing="false" onAction="#handleDelete" prefHeight="31.0" prefWidth="80.0" text="Delete" />
+                <Button mnemonicParsing="false" onAction="#handleAdd" prefHeight="31.0" prefWidth="56.0" text="Add" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.0" />
+                <Button mnemonicParsing="false" onAction="#handleUpdate" prefHeight="31.0" prefWidth="72.0" text="Update" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.0" />
+                <Button mnemonicParsing="false" onAction="#handleDelete" prefHeight="31.0" prefWidth="65.0" text="Delete" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.0" />
+              <Button mnemonicParsing="false" onAction="#handleClear" prefHeight="31.0" prefWidth="59.0" text="Clear" />
             </children>
         </HBox>
-        <Button layoutX="500.0" layoutY="381.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="31.0" prefWidth="112.0" text="Clear" />
+      <VBox layoutX="482.0" layoutY="296.0" prefHeight="141.0" prefWidth="100.0">
+         <children>
+            <Label text="Students:" />
+            <Separator prefHeight="21.0" prefWidth="100.0" />
+            <Label text="Homework ID:" />
+            <Separator prefHeight="20.0" prefWidth="100.0" />
+            <Label prefHeight="21.0" prefWidth="74.0" text="Week:" />
+            <Separator prefHeight="19.0" prefWidth="100.0" />
+            <Label text="Feedback:" />
+            <Separator prefHeight="21.0" prefWidth="100.0" />
+            <Label text="Grade:" />
+         </children>
+      </VBox>
+      <VBox layoutX="617.0" layoutY="296.0" prefHeight="165.0" prefWidth="151.0">
+         <children>
+            <TextField fx:id="students" />
+            <Separator prefWidth="200.0" />
+            <TextField fx:id="hid" />
+            <Separator prefWidth="200.0" />
+            <TextField fx:id="week" />
+            <Separator prefWidth="200.0" />
+            <TextField fx:id="fback" />
+            <Separator prefWidth="200.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="grade" prefHeight="31.0" prefWidth="172.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Separator layoutX="478.0" layoutY="284.0" prefHeight="12.0" prefWidth="304.0" />
+      <RadioButton fx:id="missingReason" layoutX="482.0" layoutY="463.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="136.0" text="Missing reason" />
+      <Button layoutX="643.0" layoutY="458.0" mnemonicParsing="false" onAction="#handleGrade" prefHeight="31.0" prefWidth="100.0" text="Grade" />
     </children>
 </AnchorPane>
