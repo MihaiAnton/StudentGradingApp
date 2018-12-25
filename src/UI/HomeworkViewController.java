@@ -2,6 +2,7 @@ package UI;
 
 import Domain.Homework;
 import Exceptions.ValidationException;
+import Service.SecurityService;
 import Utils.Events.HomeworkEvent;
 import Utils.Events.ServiceEvent;
 import Validators.HomeworkValidator;
@@ -14,6 +15,12 @@ public class HomeworkViewController extends TemplateController<Homework> {
 
     @FXML
     TextField tid, tdesc, ttrgWeek, tddlWeek;
+
+    private SecurityService securityService;
+
+    public void setSecurityService(SecurityService securityService){
+        this.securityService = securityService;
+    }
 
 
     @FXML

@@ -3,6 +3,7 @@ package UI;
 import Domain.Grade;
 import Domain.Homework;
 import Domain.Student;
+import Service.SecurityService;
 import Service.TeacherService;
 import Utils.Events.ServiceEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,12 @@ public class GradesViewController extends TemplateController<Grade>{
 
     @FXML
     TextField studentId;
+
+    private SecurityService securityService;
+
+    public void setSecurityService(SecurityService securityService){
+        this.securityService = securityService;
+    }
 
     @Override
     public void setService(TeacherService service){

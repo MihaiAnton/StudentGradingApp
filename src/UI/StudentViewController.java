@@ -3,6 +3,7 @@ package UI;
 
 import Domain.Student;
 import Exceptions.ValidationException;
+import Service.SecurityService;
 import Utils.Events.ServiceEvent;
 import Utils.Events.StudentEvent;
 import Validators.StudentValidator;
@@ -22,6 +23,12 @@ public class StudentViewController extends TemplateController<Student>{
 
     @FXML
     TextField students, hid, week, fback, grade;
+
+    private SecurityService securityService;
+
+    public void setSecurityService(SecurityService securityService){
+        this.securityService = securityService;
+    }
 
 
     @FXML

@@ -1,9 +1,8 @@
 
 
 
-import Repository.GradeRepository;
-import Repository.HomeworkRepository;
-import Repository.StudentRepository;
+import Repository.*;
+import Service.SecurityService;
 import Service.TeacherService;
 import UI.MainController;
 import Validators.GenericValidator;
@@ -32,7 +31,7 @@ public class Main extends Application {
         Pane pane = (Pane) loader.load();
         MainController controller = loader.getController();
 
-        controller.setServices(getTeacherService());
+        controller.setServices(getTeacherService(), getSecurityService());
         Scene mainScene = new Scene(pane);
         primaryStage.setScene(mainScene);
 
@@ -65,9 +64,25 @@ public class Main extends Application {
         return teacherService;
     }
 
+    static SecurityService getSecurityService(){
+
+        //repo files
+        String userFile = "M:\\School\\Metode Avansate de Programare\\StudentGradingApp\\src\\DataFiles\\Users.XML";
+        String loginInfoFile = "M:\\School\\Metode Avansate de Programare\\StudentGradingApp\\src\\DataFiles\\LoginInfo.XML";
+
+        //repos
+        UserRepository userRepository = new UserRepository(new GenericValidator(),userFile,"user");
+        LoginInfo loginInfo = new LoginInfo(new GenericValidator(), loginInfoFile, "password");
+
+        //service
+        SecurityService securityService = new SecurityService(userRepository,
+                                                              loginInfo);
+
+        return securityService;
+    }
+
 
     public static void main(String[] args) {
-
         launch(args);
     }
 
