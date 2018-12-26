@@ -2,6 +2,7 @@ package UI;
 
 
 import Service.TeacherService;
+import Utils.Events.Event;
 import Utils.Observer;
 import Utils.Events.ServiceEvent;
 import javafx.collections.FXCollections;
@@ -11,7 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
-public abstract class TemplateController<E> implements Observer<ServiceEvent> {
+public abstract class TemplateController<E> implements Observer<Event> {
 
     @FXML
     protected TableView<E> table;

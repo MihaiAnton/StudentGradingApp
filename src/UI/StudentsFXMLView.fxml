@@ -150,5 +150,7 @@
             <Image url="@Icons/backIcon.png" />
          </image>
       </ImageView>
+        <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
+
     </children>
 </AnchorPane>

@@ -1,7 +1,10 @@
 package UI;
 
+import Domain.AccesRight;
 import Service.SecurityService;
 import Service.TeacherService;
+import Utils.Clock;
+import Utils.Events.SecurityEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +17,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import static Domain.AccesRight.ADMIN;
+import static Domain.AccesRight.FULL;
+import static Domain.AccesRight.RESTRICTED;
+
 //'file:M:\School\Metode Avansate de Programare\StudentGradingApp\src\UI\Backgrounds\download.jpg'
 
 
@@ -25,8 +32,10 @@ public class MainController {
 
     private Stage thisStage;
 
+    private Clock clock;
+
     @FXML
-    private Text loginStatus;
+    private Text loginStatus,clockText;
     @FXML
     private TextField username;
 
@@ -54,7 +63,7 @@ public class MainController {
     }
 
     private void initSecurityFeatures() {
-        loginStatus.setText(loginStatusText);
+        loginStatus.setText(securityService.getLogStatus());
         clearFields();
     }
 
@@ -75,8 +84,9 @@ public class MainController {
                 FXMLLoader loaderLeft = new FXMLLoader(getClass().getResource("StudentsFXMLView.fxml"));
                 Pane leftPane = loaderLeft.load();
                 StudentViewController studentViewController = loaderLeft.getController();
-                studentViewController.setService(this.teacherService);
                 studentViewController.setSecurityService(this.securityService);
+                studentViewController.setService(this.teacherService);
+
                 studentStage.setScene(new Scene(leftPane));
                 studentViewController.setStage(studentStage);
                 studentStage.initStyle(StageStyle.UNDECORATED);
@@ -90,6 +100,7 @@ public class MainController {
                 FXMLLoader loaderRight = new FXMLLoader(getClass().getResource("HomeworkFXMLView.fxml"));
                 Pane rightPane =  loaderRight.load();
                 HomeworkViewController homeworkViewController = loaderRight.getController();
+                homeworkViewController.setSecurityService(this.securityService);
                 homeworkViewController.setService(teacherService);
                 homeworkViewController.setSecurityService(this.securityService);
                 homeworkStage.setScene(new Scene(rightPane));
@@ -104,8 +115,9 @@ public class MainController {
                 FXMLLoader loaderGrades = new FXMLLoader(getClass().getResource("GradesFXMLView.fxml"));
                 Pane gradePane =  loaderGrades.load();
                 GradesViewController gradesViewController = loaderGrades.getController();
-                gradesViewController.setService(teacherService);
                 gradesViewController.setSecurityService(this.securityService);
+                gradesViewController.setService(teacherService);
+
                 gradesStage.setScene(new Scene(gradePane));
                 gradesViewController.setStage(gradesStage);
                 gradesStage.initStyle(StageStyle.UNDECORATED);
@@ -114,27 +126,53 @@ public class MainController {
                 System.out.println(e.getMessage());
             }
 
+            clock = new Clock(this.clockText);
+            clock.start();
+
+
         }
         catch(Exception e){}
     }
 
     @FXML
     public void openStudentScene(){
-        studentStage.show();
+        AccesRight[] neededRight = {ADMIN, FULL};
+
+        if(securityService.grantAcces(neededRight)){
+            studentStage.show();
+        }
+        else{
+            handleError("You don't have the acces rights to enter this menu.");
+        }
     }
 
     @FXML
     public void openHomeworkScene(){
-        homeworkStage.show();
+        AccesRight[] neededRight = {ADMIN, FULL, RESTRICTED};
+
+        if(securityService.grantAcces(neededRight)){
+            homeworkStage.show();
+        }
+        else {
+            handleError("Log in to enter this menu.");
+        }
     }
 
     @FXML
     public void openGradesScene(){
-        gradesStage.show();
+        AccesRight[] neededRight = {ADMIN, FULL, RESTRICTED};
+
+        if(securityService.grantAcces(neededRight)){
+            gradesStage.show();
+        }
+        else{
+            handleError("Log in to enter this menu.");
+        }
     }
 
 
     public void handleExit(MouseEvent mouseEvent) {
+        this.clock.stopClock();
         this.quitStage();
     }
 
@@ -148,6 +186,7 @@ public class MainController {
             String name = username.getText();
             initSecurityFeatures();
             handleConfirmation("Logged in as " + name + ".","Login confirmation");
+            this.securityService.notifyObserver(new SecurityEvent(null,"security"));
         }
         catch (SecurityException e){
             handleError(e.getMessage());
@@ -164,6 +203,7 @@ public class MainController {
             loginStatusText = "Not logged in.";
             initSecurityFeatures();
             handleConfirmation("Successfully logged out.","Logout confirmation.");
+            this.securityService.notifyObserver(new SecurityEvent(null,"security"));
         }
         catch (SecurityException e){
             handleError(e.getMessage());

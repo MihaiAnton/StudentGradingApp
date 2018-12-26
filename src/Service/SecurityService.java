@@ -5,13 +5,14 @@ import Domain.Password;
 import Domain.User;
 import Repository.LoginInfo;
 import Repository.UserRepository;
+import Utils.Events.Event;
 import Utils.Events.SecurityEvent;
 import Utils.Observable;
 import Utils.Observer;
 
 import java.util.ArrayList;
 
-public class SecurityService implements Observable<SecurityEvent> {
+public class SecurityService implements Observable<Event> {
 
     private UserRepository userRepository;  //user repo
     private LoginInfo loginInfo;            //password repo
@@ -138,13 +139,46 @@ public class SecurityService implements Observable<SecurityEvent> {
 
 
 
+    public AccesRight getAccesRight(){
+        return this.accesRight;
+    }
+
+    public boolean grantAcces(AccesRight[] rightsNeeded){
+        //grants acces if the current right is in the list
+        for(AccesRight right : rightsNeeded){
+            if(getAccesRight().equals(right)){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
 
 
-
-
+    public String getStudentId(){
+        if(loggedUser == null){
+            return null;
+        }
+        if(accesRight == AccesRight.RESTRICTED){
+            char[] cset = loggedUser.getUserName().toCharArray();
+            String id = "";
+            for(int i =0;i<cset.length;i++){
+                if(cset[i] == '@'){
+                    return id;
+                }
+                else if(cset[i] >= (char)'0' && cset[i] <= (char)'9'){
+                    id = id + cset[i];
+                }
+                else{
+                    id = "";
+                }
+            }
+            return id;
+        }
+        return null;
+    }
 
 
 
@@ -166,12 +200,12 @@ public class SecurityService implements Observable<SecurityEvent> {
 
 
     @Override
-    public void addObserver(Observer<SecurityEvent> observer) {
+    public void addObserver(Observer<Event> observer) {
         this.observers.add(observer);
     }
 
     @Override
-    public void removeObserver(Observer<SecurityEvent> observer) {
+    public void removeObserver(Observer<Event> observer) {
         for(int i=0;i<observers.size();i++){
             if(observers.get(i) == observer){
                 observers.remove(i);
@@ -181,9 +215,18 @@ public class SecurityService implements Observable<SecurityEvent> {
     }
 
     @Override
-    public void notifyObserver(SecurityEvent event) {
+    public void notifyObserver(Event event) {
         for (Observer obs:observers) {
             obs.notify(event);
+        }
+    }
+
+    public String getLogStatus() {
+        if(loggedIn){
+            return "Logged in as " + this.loggedUser.getUserName();
+        }
+        else{
+            return "Not logged in.";
         }
     }
 }

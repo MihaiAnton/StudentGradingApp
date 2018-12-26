@@ -4,6 +4,8 @@ package UI;
 import Domain.Student;
 import Exceptions.ValidationException;
 import Service.SecurityService;
+import Utils.Events.Event;
+import Utils.Events.SecurityEvent;
 import Utils.Events.ServiceEvent;
 import Utils.Events.StudentEvent;
 import Validators.StudentValidator;
@@ -11,6 +13,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+
+import static Domain.AccesRight.GENERIC;
+import static Domain.AccesRight.RESTRICTED;
 
 public class StudentViewController extends TemplateController<Student>{
 
@@ -23,6 +29,9 @@ public class StudentViewController extends TemplateController<Student>{
 
     @FXML
     TextField students, hid, week, fback, grade;
+
+    @FXML
+    Text loginStatus;
 
     private SecurityService securityService;
 
@@ -87,6 +96,7 @@ public class StudentViewController extends TemplateController<Student>{
     @Override
     protected void addThisToServiceList() {
         this.service.addObserver(this);
+        this.securityService.addObserver(this);
     }
 
     @Override
@@ -131,30 +141,39 @@ public class StudentViewController extends TemplateController<Student>{
 
 
     @Override
-    public void notify(ServiceEvent event) {
-        if(!event.getEventType().equals("student")) {
-            return;
-        }
+    public void notify(Event e) {
+        if(e.getEventType().equals("security")) {
+            SecurityEvent se = (SecurityEvent) e;
 
-        Student s = (Student)event.getEntity().getEntity();
-
-        if(event.getEntity().getEventType().equals("add")){
-            this.controllerModel.add(s);
+            loginStatus.setText(securityService.getLogStatus());
         }
-        else if(event.getEntity().getEventType().equals("update")){
-            for(int i=0;i<controllerModel.size();i++){
-                if(controllerModel.get(i).getId().equals(s.getId())){
-                    controllerModel.remove(i);
-                    break;
-                }
+        else {
+
+
+            ServiceEvent event = (ServiceEvent) e;
+
+            if (!event.getEventType().equals("student")) {
+                return;
             }
-            this.controllerModel.add(s);
-        }
-        else if(event.getEntity().getEventType().equals("delete")){
-            for(int i=0;i<controllerModel.size();i++){
-                if(controllerModel.get(i).getId().equals(s.getId())){
-                    controllerModel.remove(i);
-                    break;
+
+            Student s = (Student) event.getEntity().getEntity();
+
+            if (event.getEntity().getEventType().equals("add")) {
+                this.controllerModel.add(s);
+            } else if (event.getEntity().getEventType().equals("update")) {
+                for (int i = 0; i < controllerModel.size(); i++) {
+                    if (controllerModel.get(i).getId().equals(s.getId())) {
+                        controllerModel.remove(i);
+                        break;
+                    }
+                }
+                this.controllerModel.add(s);
+            } else if (event.getEntity().getEventType().equals("delete")) {
+                for (int i = 0; i < controllerModel.size(); i++) {
+                    if (controllerModel.get(i).getId().equals(s.getId())) {
+                        controllerModel.remove(i);
+                        break;
+                    }
                 }
             }
         }
@@ -238,6 +257,8 @@ public class StudentViewController extends TemplateController<Student>{
         msg.setContentText(text);
         msg.showAndWait();
     }
+
+
 }
 
 

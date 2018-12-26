@@ -1,20 +1,34 @@
 package UI;
 
+import Domain.AccesRight;
 import Domain.Homework;
 import Exceptions.ValidationException;
 import Service.SecurityService;
+import Utils.Events.Event;
 import Utils.Events.HomeworkEvent;
+import Utils.Events.SecurityEvent;
 import Utils.Events.ServiceEvent;
 import Validators.HomeworkValidator;
 import Validators.Validator;
+import javafx.concurrent.Service;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+
+import static Domain.AccesRight.*;
 
 public class HomeworkViewController extends TemplateController<Homework> {
 
 
     @FXML
     TextField tid, tdesc, ttrgWeek, tddlWeek;
+
+    @FXML
+    Button badd, bupdate, bdelete, bclear;
+
+    @FXML
+    Text loginStatus;
 
     private SecurityService securityService;
 
@@ -25,6 +39,7 @@ public class HomeworkViewController extends TemplateController<Homework> {
 
     @FXML
     public void handleAdd(){
+
         try{
             Homework h = getEntityFromFields();
             if(this.service.addHomework(h) == null) {
@@ -78,6 +93,7 @@ public class HomeworkViewController extends TemplateController<Homework> {
     @Override
     protected void addThisToServiceList() {
         this.service.addObserver(this);
+        this.securityService.addObserver(this);
     }
 
     @Override
@@ -119,35 +135,69 @@ public class HomeworkViewController extends TemplateController<Homework> {
     }
 
     @Override
-    public void notify(ServiceEvent event) {
+    public void notify(Event e) {
+        if(e.getEventType().equals("security")){
+            SecurityEvent se = (SecurityEvent)e;
 
-        if(!event.getEventType().equals("homework")){
-            return;
-        }
+            if(securityService.getAccesRight().equals(RESTRICTED) ||
+               securityService.getAccesRight().equals(GENERIC)){
 
-        Homework h = (Homework)event.getEntity().getEntity();
-        if(event.getEntity().getEventType().equals("add")){
-            this.controllerModel.add(h);
-        }
-        else if(event.getEntity().getEventType().equals("update")){
-            for(int i = 0;i<controllerModel.size();i++){
-                if(controllerModel.get(i).getId().equals(h.getId())){
-                    controllerModel.remove(i);
-                    break;
-                }
+                blockButtons();
             }
-            controllerModel.add(h);
+            else{
+                unblockButtons();
+            }
+            loginStatus.setText(securityService.getLogStatus());
+
         }
-        else if(event.getEntity().getEventType().equals("delete")){
-            for(int i = 0;i<controllerModel.size();i++){
-                if(controllerModel.get(i).getId().equals(h.getId())){
-                    controllerModel.remove(i);
-                    break;
+        else {
+
+
+            ServiceEvent event = (ServiceEvent) e;
+
+
+            if (!event.getEventType().equals("homework")) {
+                return;
+            }
+
+            Homework h = (Homework) event.getEntity().getEntity();
+            if (event.getEntity().getEventType().equals("add")) {
+                this.controllerModel.add(h);
+            } else if (event.getEntity().getEventType().equals("update")) {
+                for (int i = 0; i < controllerModel.size(); i++) {
+                    if (controllerModel.get(i).getId().equals(h.getId())) {
+                        controllerModel.remove(i);
+                        break;
+                    }
+                }
+                controllerModel.add(h);
+            } else if (event.getEntity().getEventType().equals("delete")) {
+                for (int i = 0; i < controllerModel.size(); i++) {
+                    if (controllerModel.get(i).getId().equals(h.getId())) {
+                        controllerModel.remove(i);
+                        break;
+                    }
                 }
             }
         }
 
     }
+
+    private void blockButtons() {
+        badd.setDisable(true);
+        bclear.setDisable(true);
+        bupdate.setDisable(true);
+        bdelete.setDisable(true);
+    }
+
+    private void unblockButtons() {
+        badd.setDisable(false);
+        bclear.setDisable(false);
+        bupdate.setDisable(false);
+        bdelete.setDisable(false);
+    }
+
+
 }
 
 
