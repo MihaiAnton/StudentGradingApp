@@ -22,7 +22,12 @@ public class GradeRepository extends XMLRepository<String, Grade> {
 
         String feedback = item.getElementsByTagName("feedback").item(0).getChildNodes().item(0).getNodeValue();
 
-        return new Grade(sid,Integer.parseInt(hid), grade, feedback);
+        int week = Integer.parseInt(item.getElementsByTagName("week").item(0).getChildNodes().item(0).getNodeValue());
+
+        Grade grade1 = new  Grade(sid,Integer.parseInt(hid), grade, feedback);
+        grade1.setWeek(week);
+
+        return grade1;
     }
 
     @Override
@@ -34,6 +39,7 @@ public class GradeRepository extends XMLRepository<String, Grade> {
         homeworkRoot.appendChild(getLabelNode("homeworkId",""+entity.getHomeworkId(),document));
         homeworkRoot.appendChild(getLabelNode("gr",String.valueOf(entity.getGrade()),document));
         homeworkRoot.appendChild(getLabelNode("feedback", entity.getFeedback(), document));
+        homeworkRoot.appendChild(getLabelNode("week", ""+entity.getWeek(), document));
 
         return homeworkRoot;
     }

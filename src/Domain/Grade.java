@@ -11,7 +11,15 @@ public class Grade implements IdEntity<String>{
     private String studTeacher;
     private String studName;
     private String feedback;
+    private int week;
 
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
 
     public Grade(String studentId, int homeworkId, double grade, String feedback){
         this.studentId = studentId;

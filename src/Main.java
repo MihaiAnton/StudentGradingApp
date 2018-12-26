@@ -2,6 +2,7 @@
 
 
 import Repository.*;
+import Service.ReportService;
 import Service.SecurityService;
 import Service.TeacherService;
 import UI.MainController;
@@ -21,7 +22,7 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
-
+    static TeacherService teacherService;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -31,7 +32,8 @@ public class Main extends Application {
         Pane pane = (Pane) loader.load();
         MainController controller = loader.getController();
 
-        controller.setServices(getTeacherService(), getSecurityService());
+        teacherService = getTeacherService();
+        controller.setServices(teacherService, getSecurityService());
         Scene mainScene = new Scene(pane);
         primaryStage.setScene(mainScene);
 
@@ -59,7 +61,8 @@ public class Main extends Application {
         TeacherService teacherService = new TeacherService(studentRepository,
                                                            homeworkRepository,
                                                            gradeRepository);
-
+        ReportService reportService = new ReportService(teacherService);
+        reportService.createPDFReport("abc","./");
 
         return teacherService;
     }
@@ -83,6 +86,10 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+
+
+
+
         launch(args);
     }
 

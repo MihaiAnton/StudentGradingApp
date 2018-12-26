@@ -8,5 +8,31 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$USER_HOME$/Downloads/itext5-5.5.12" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$USER_HOME$/Downloads/itext5-5.5.12" />
+        </SOURCES>
+        <jarDirectory url="file://$USER_HOME$/Downloads/itext5-5.5.12" recursive="false" />
+        <jarDirectory url="file://$USER_HOME$/Downloads/itext5-5.5.12" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>

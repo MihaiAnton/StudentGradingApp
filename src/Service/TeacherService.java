@@ -245,6 +245,7 @@ public class TeacherService implements Observable<Event> {
             //h.setAssignmentWeek(assignmentWeek);
             //h.setGrade(grade);
             Grade grade1 = new Grade(studentId, homeworkId, h.getGrade(), feedback);
+            grade1.setWeek(assignmentWeek);
             gradeRepo.save(grade1);
 
             // Print assignment
