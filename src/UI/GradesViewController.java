@@ -1,17 +1,25 @@
 package UI;
 
+import Domain.AccesRight;
 import Domain.Grade;
 import Domain.Homework;
 import Domain.Student;
+import Service.SecurityService;
 import Service.TeacherService;
+import Utils.Events.Event;
+import Utils.Events.SecurityEvent;
 import Utils.Events.ServiceEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
+import static Domain.AccesRight.GENERIC;
+import static Domain.AccesRight.RESTRICTED;
 
 public class GradesViewController extends TemplateController<Grade>{
 
@@ -24,6 +32,16 @@ public class GradesViewController extends TemplateController<Grade>{
     @FXML
     TextField studentId;
 
+    @FXML
+    Text loginStatus;
+
+    private SecurityService securityService;
+
+    public void setSecurityService(SecurityService securityService){
+
+        this.securityService = securityService;
+    }
+
     @Override
     public void setService(TeacherService service){
         this.service = service;
@@ -34,10 +52,15 @@ public class GradesViewController extends TemplateController<Grade>{
     }
 
     private void setChoices() {
+        Set<Integer> hids = new HashSet<>();
         homeworkCB.getItems().clear();
 
-        for(Homework h: service.getHomeworkIterable()){
-            homeworkCB.getItems().add("" + h.getId());
+        for(Grade grade: service.getAllGrades()){
+            hids.add(grade.getHomeworkId());
+        }
+
+        for (Integer id:hids   ) {
+            homeworkCB.getItems().add("" + id);
         }
 
         homeworkCB.getItems().add("None");
@@ -60,15 +83,22 @@ public class GradesViewController extends TemplateController<Grade>{
 
     private void setDefaultValues() {
 
-        studentId.setText("");
+        if (securityService.getStudentId() != null)
+            studentId.setText(securityService.getStudentId());
+
+        else{
+            studentId.setText("");
+        }
         groupCB.setValue("None");
         homeworkCB.setValue("None");
+        this.handleFilter();
     }
 
 
     @Override
     protected void addThisToServiceList() {
         this.service.addObserver(this);
+        this.securityService.addObserver(this);
     }
 
     @Override
@@ -83,8 +113,14 @@ public class GradesViewController extends TemplateController<Grade>{
     }
 
     @Override
-    public void notify(ServiceEvent event) {
+    public void notify(Event event) {
+        if(event.getEventType().equals("security")) {
+            SecurityEvent se = (SecurityEvent) event;
 
+            loginStatus.setText(securityService.getLogStatus());
+        }
+        setDefaultValues();
+        handleFilter();
     }
 
     @FXML
@@ -156,9 +192,17 @@ public class GradesViewController extends TemplateController<Grade>{
                 x.setStudName(student.getName());
                 x.setStudTeacher(student.getTeacher());
                 x.setStudentId(student.getId());
-                controllerModel.add(x);
+
+                if(securityService.getAccesRight() == AccesRight.RESTRICTED) {
+                    if(securityService.getStudentId() != null && securityService.getStudentId().equals(x.getStudId()))
+                        controllerModel.add(x);
+                }
+                else{
+                    controllerModel.add(x);
+                }
             }
         });
     }
+
 
 }

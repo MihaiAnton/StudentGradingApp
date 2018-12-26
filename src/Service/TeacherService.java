@@ -7,6 +7,7 @@ import Exceptions.ServiceException;
 
 import Repository.GenericHashMapRepository;
 
+import Utils.Events.Event;
 import Utils.Observable;
 import Utils.Observer;
 import Utils.Events.ServiceEvent;
@@ -19,7 +20,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class TeacherService implements Observable<ServiceEvent> {
+public class TeacherService implements Observable<Event> {
 
     private GenericHashMapRepository<String, Student> studentRepo;
     private GenericHashMapRepository<Integer, Homework> homeworkRepo;
@@ -369,12 +370,15 @@ o ”Feedback:” aprecieri, sugestii, precizări în legătură cu depunctăril
 
 
     @Override
-    public void addObserver(Observer<ServiceEvent> observer) {
+    public void addObserver(Observer<Event> observer) {
         this.observers.add(observer);
     }
 
+
+
+
     @Override
-    public void removeObserver(Observer<ServiceEvent> observer) {
+    public void removeObserver(Observer<Event> observer) {
         try{
             this.observers.remove(observer);
         }
@@ -384,7 +388,7 @@ o ”Feedback:” aprecieri, sugestii, precizări în legătură cu depunctăril
     }
 
     @Override
-    public void notifyObserver(ServiceEvent event) {
+    public void notifyObserver(Event event) {
         for (Observer obs:this.observers       ) {
             obs.notify(event);
         }
