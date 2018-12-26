@@ -1,6 +1,7 @@
 package UI;
 
 import Domain.AccesRight;
+import Service.ReportService;
 import Service.SecurityService;
 import Service.TeacherService;
 import Utils.Clock;
@@ -28,7 +29,8 @@ public class MainController {
 
     private TeacherService teacherService;
     private SecurityService securityService;
-    private Stage studentStage, homeworkStage, gradesStage;
+    private ReportService reportService;
+    private Stage studentStage, homeworkStage, gradesStage, reportStage;
 
     private Stage thisStage;
 
@@ -52,10 +54,11 @@ public class MainController {
         this.thisStage.close();
     }
 
-    public void setServices(TeacherService teacherService, SecurityService securityService){
+    public void setServices(TeacherService teacherService, SecurityService securityService, ReportService reportService){
 
         this.teacherService = teacherService;
         this.securityService = securityService;
+        this.reportService = reportService;
         loginStatusText = "Not logged in.";
         initComponents();
         initSecurityFeatures();
@@ -126,6 +129,23 @@ public class MainController {
                 System.out.println(e.getMessage());
             }
 
+            try{
+                this.reportStage = new Stage();
+                FXMLLoader reportLoader = new FXMLLoader(getClass().getResource("ReportsFXMLView.fxml"));
+                Pane reportPane = reportLoader.load();
+                ReportsViewController reportsViewController = reportLoader.getController();
+                reportsViewController.setSecurityService(this.securityService);
+                reportsViewController.setService(teacherService);
+                reportsViewController.setReportsService(this.reportService);
+
+                reportStage.setScene(new Scene(reportPane));
+                reportsViewController.setStage(reportStage);
+                reportStage.initStyle(StageStyle.UNDECORATED);
+            }
+            catch(Exception e){
+
+            }
+
             clock = new Clock(this.clockText);
             clock.start();
 
@@ -167,6 +187,18 @@ public class MainController {
         }
         else{
             handleError("Log in to enter this menu.");
+        }
+    }
+
+    @FXML
+    public void openReportScene(){
+        AccesRight[] neededRight = {ADMIN, FULL};
+
+        if(securityService.grantAcces(neededRight)){
+            reportStage.show();
+        }
+        else{
+            handleError("You don't have the acces rights to enter this menu.");
         }
     }
 

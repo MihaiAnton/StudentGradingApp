@@ -33,7 +33,7 @@ public class Main extends Application {
         MainController controller = loader.getController();
 
         teacherService = getTeacherService();
-        controller.setServices(teacherService, getSecurityService());
+        controller.setServices(teacherService, getSecurityService(),getReportsService());
         Scene mainScene = new Scene(pane);
         primaryStage.setScene(mainScene);
 
@@ -61,10 +61,14 @@ public class Main extends Application {
         TeacherService teacherService = new TeacherService(studentRepository,
                                                            homeworkRepository,
                                                            gradeRepository);
-        ReportService reportService = new ReportService(teacherService);
-        reportService.createPDFReport("abc","./");
+
 
         return teacherService;
+    }
+
+    static ReportService getReportsService(){
+        ReportService reportService = new ReportService(teacherService);
+        return reportService;
     }
 
     static SecurityService getSecurityService(){

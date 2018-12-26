@@ -15,32 +15,32 @@
         <URL value="@views.css" />
     </stylesheets>
     <children>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="82.0" layoutY="275.0" onMouseClicked="#openStudentScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="250.0" onMouseClicked="#openStudentScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/images.png" />
          </image>
       </ImageView>
-      <Label layoutX="90.0" layoutY="235.0" text="Students Menu" textFill="#d36435">
+      <Label layoutX="53.0" layoutY="409.0" text="Students Menu" textFill="#d36435">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="326.0" layoutY="275.0" onMouseClicked="#openHomeworkScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="230.0" layoutY="250.0" onMouseClicked="#openHomeworkScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/calendar.png" />
          </image>
       </ImageView>
-      <Label layoutX="323.0" layoutY="235.0" text="Homework Menu" textFill="#5d90c3">
+      <Label layoutX="228.0" layoutY="409.0" text="Homework Menu" textFill="#5d90c3">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="577.0" layoutY="275.0" onMouseClicked="#openGradesScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="418.0" layoutY="250.0" onMouseClicked="#openGradesScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/grade.png" />
          </image>
       </ImageView>
-      <Label layoutX="596.0" layoutY="236.0" text="Grades Menu" textFill="#b1ccba">
+      <Label layoutX="437.0" layoutY="410.0" text="Grades Menu" textFill="#b1ccba">
          <font>
             <Font size="19.0" />
          </font>
@@ -72,6 +72,16 @@
       <Text fx:id="clockText" fill="#89a1c3" layoutX="27.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
             <Font size="18.0" />
+         </font>
+      </Text>
+      <ImageView onMouseClicked="#openReportScene" fitHeight="150.0" fitWidth="150.0" layoutX="601.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/report.png" />
+         </image>
+      </ImageView>
+      <Text fill="#5869c9" layoutX="644.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
+         <font>
+            <Font size="19.0" />
          </font>
       </Text>
         </children>

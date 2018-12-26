@@ -20,6 +20,10 @@ import java.util.*;
 public class ReportService {
 
     private TeacherService teacherService;
+    public int STUDENT_AVERAGE = 1;
+    public int HARDEST_HOMEWORK = 2;
+    public int EXAMABLE_STUDENTS = 4;
+    public int ON_TIME_STUDENTS = 8;
 
     public ReportService(TeacherService teacherService){
         this.teacherService = teacherService;
@@ -168,38 +172,50 @@ public class ReportService {
        return result;
     }
 
-    public void createPDFReport(String name, String dest){
+    public void createPDFReport(String name, String dest,int reportsCode){
         try {
+            if(reportsCode == 0)
+                return;
+
             Document document = new Document();
-            PdfWriter.getInstance(document,new FileOutputStream("test.pdf"));
+            PdfWriter.getInstance(document,new FileOutputStream(dest + name));
             document.open();
 
             document.add(new Paragraph("\n                      Student report:\n\n"));
 
-            document.add(new Paragraph("\n\nAverage grades:\n\n"));
-            for (String s:reportStudentsAverage()) {
-                document.add(new Paragraph(s));
+
+            if((reportsCode & 1) > 0) {
+                document.add(new Paragraph("\n\nAverage grades:\n\n"));
+                for (String s : reportStudentsAverage()) {
+                    document.add(new Paragraph(s));
+                }
             }
 
-            document.add(new Paragraph("\n\nHardest homework:\n\n"));
-            document.add(new Paragraph(this.reportHarderstHomework()));
-
-
-            document.add(new Paragraph("\n\nStudents able to take the exam:\n\n"));
-            for (String s:reportExamAbleStudents()) {
-                document.add(new Paragraph(s));
+            if((reportsCode & 2) > 0) {
+                document.add(new Paragraph("\n\nHardest homework:\n\n"));
+                document.add(new Paragraph(this.reportHarderstHomework()));
             }
 
-            document.add(new Paragraph("\n\nStudents that assigned the homework on time:\n\n"));
-            for (String s:reportOnTimeStudents()) {
-                document.add(new Paragraph(s));
+            if((reportsCode & 4) > 0) {
+                document.add(new Paragraph("\n\nStudents able to take the exam:\n\n"));
+                for (String s : reportExamAbleStudents()) {
+                    document.add(new Paragraph(s));
+                }
             }
+
+            if((reportsCode & 8) > 0) {
+                document.add(new Paragraph("\n\nStudents that assigned the homework on time:\n\n"));
+                for (String s : reportOnTimeStudents()) {
+                    document.add(new Paragraph(s));
+                }
+            }
+
             document.close();
 
 
         }
         catch(Exception e){
-
+            throw new RuntimeException(e.getMessage());
         }
     }
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="anchorSubMenu" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.ReportsViewController">
+    <stylesheets>
+        <URL value="@views.css" />
+    </stylesheets>
+    <children>
+      <Text layoutX="566.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports Menu">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+       <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
+       <Button layoutX="347.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleGenerateReport" text="Generate Report" />
+        <RadioButton fx:id="studGrades" layoutX="75.0" layoutY="99.0" mnemonicParsing="false" selected="true" text="Students' average grades" textFill="#eee8e8" />
+        <RadioButton fx:id="hardesHw" layoutX="75.0" layoutY="129.0" mnemonicParsing="false" selected="true" text="The hardest homework" textFill="#eee8e8" />
+        <RadioButton fx:id="examableStuds" layoutX="75.0" layoutY="160.0" mnemonicParsing="false" selected="true" text="Students able to enter the exam" textFill="#eee8e8" />
+        <RadioButton fx:id="ontimeStuds" layoutX="75.0" layoutY="190.0" mnemonicParsing="false" selected="true" text="Students that assigned on time" textFill="#eee8e8" />
+        <Label layoutX="447.0" layoutY="99.0" text="Report Name: " />
+        <TextField fx:id="name" layoutX="563.0" layoutY="94.0" prefHeight="31.0" prefWidth="180.0" />
+        <Label layoutX="483.0" layoutY="150.0" text="Location:" />
+        <TextField fx:id="locationTF" layoutX="563.0" layoutY="145.0" prefHeight="31.0" prefWidth="180.0" />
+        <TableView fx:id="table" layoutX="14.0" layoutY="270.0" opacity="0.0" prefHeight="224.0" prefWidth="309.0">
+        <columns>
+          <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
+        </columns>
+      </TableView>
+        <ImageView fitHeight="48.0" fitWidth="81.0" layoutX="727.0" layoutY="438.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Icons/backIcon.png" />
+            </image>
+        </ImageView>
+   </children>
+</AnchorPane>
