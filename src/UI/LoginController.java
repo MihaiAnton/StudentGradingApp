@@ -47,6 +47,11 @@ public class LoginController {
         this.stage = googleLoginStage;
     }
 
+    @FXML
+    public void quitStage(){
+        this.stage.close();
+    }
+
     public void show() {
         this.stage.show();
     }

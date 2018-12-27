@@ -178,6 +178,12 @@ public class MainController {
             clock.start();
 
 
+
+            //login for demo
+            securityService.logIn("admin@cs.ubbcluj.ro","admin1234");
+            this.securityService.notifyObserver(new SecurityEvent(null,"security"));
+
+
         }
         catch(Exception e){}
     }

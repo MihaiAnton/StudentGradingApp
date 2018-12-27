@@ -257,7 +257,12 @@ public class TeacherService implements Observable<Event> {
 
             // Print assignment
             String filePath = studentsPath + student.getId() + ".txt";
-            String text = "Homework: " + h.getId() + "\nAssigned in week: " + h.getAssignmentWeek() + "\nDeadline: " + h.getDeadlineWeek() + "\nFeedback: " + feedback + "\n\n";
+            String text = "Homework: " + h.getId() + "\n" +
+                          "Description: " + h.getDescription() + "\n" +
+                          "Assigned in week: " + h.getAssignmentWeek() + "\n"+
+                          "Graded: " + grade1.getGrade() + "\n" +
+                          "Deadline: " + h.getDeadlineWeek() + "\n"+
+                          "Feedback: " + feedback + "\n\n";
 
             if(mailFlag){
                 this.sendMail(grade1.getStudId(), text);
@@ -288,7 +293,12 @@ public class TeacherService implements Observable<Event> {
             return;
         }
         else{
-            this.mailService.send(s.getEmail(),"Grade notification",text);
+            //System.out.println("Before grade call");
+
+            this.mailService.setMailData(s.getEmail(),"Grade notification",text);
+            Thread mailThread = new Thread(this.mailService);
+            mailThread.start();
+            //System.out.println("after grade call");
         }
     }
 

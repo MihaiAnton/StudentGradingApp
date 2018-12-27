@@ -42,7 +42,7 @@ public class StudentValidator implements Validator<Student>{
 
     private String validateMail(String mail){
         try{
-            if(!mail.matches("[a-zA-Z][a-zA-Z0-9]*@scs.ubbcluj.ro")){
+            if(!mail.matches("[a-zA-Z][a-zA-Z0-9]*@.*")){
                 throw new Exception();
             }
         }

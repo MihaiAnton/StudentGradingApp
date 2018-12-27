@@ -1,7 +1,7 @@
 .anchor {
-    -fx-background-image:url('Backgrounds/mainWallpaper.jpg');
+    -fx-background-image:url('Backgrounds/mainWallpaper2.jpg');
 }
 
 .anchorSubMenu{
-    -fx-background-image:url('Backgrounds/background.png');
+    -fx-background-image:url('Backgrounds/mainWallpaper2.jpg');
 }

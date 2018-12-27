@@ -20,7 +20,7 @@
             <Image url="@Icons/images.png" />
          </image>
       </ImageView>
-      <Label layoutX="53.0" layoutY="409.0" text="Students Menu" textFill="#d36435">
+      <Label layoutX="81.0" layoutY="409.0" text="Students" textFill="#d36435">
          <font>
             <Font size="20.0" />
          </font>
@@ -30,7 +30,7 @@
             <Image url="@Icons/calendar.png" />
          </image>
       </ImageView>
-      <Label layoutX="228.0" layoutY="409.0" text="Homework Menu" textFill="#5d90c3">
+      <Label layoutX="257.0" layoutY="410.0" text="Homework" textFill="#5d90c3">
          <font>
             <Font size="20.0" />
          </font>
@@ -40,7 +40,7 @@
             <Image url="@Icons/grade.png" />
          </image>
       </ImageView>
-      <Label layoutX="437.0" layoutY="410.0" text="Grades Menu" textFill="#b1ccba">
+      <Label layoutX="464.0" layoutY="411.0" text="Grades" textFill="#b1ccba">
          <font>
             <Font size="19.0" />
          </font>
@@ -50,11 +50,11 @@
             <Font name="Arial Bold" size="25.0" />
          </font>
       </Label>
-      <ImageView fitHeight="48.0" fitWidth="81.0" layoutX="727.0" layoutY="438.0" onMouseClicked="#handleExit" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icons/backIcon.png" />
-         </image>
-      </ImageView>
+        <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#handleExit" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Icons/back.png" />
+            </image>
+        </ImageView>
       <Label layoutX="542.0" layoutY="28.0" text="Username:" textFill="#c6c2c2" />
       <Label layoutX="544.0" layoutY="65.0" text="Password:" textFill="#d3cbcb" />
       <TextField fx:id="username" layoutX="616.0" layoutY="23.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8eafe5;" />
@@ -74,7 +74,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <ImageView onMouseClicked="#openReportScene" fitHeight="150.0" fitWidth="150.0" layoutX="601.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="601.0" layoutY="250.0" onMouseClicked="#openReportScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/report.png" />
          </image>

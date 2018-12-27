@@ -10,10 +10,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 
-public class MailService{
+public class MailService implements Runnable {
 
     private String userName = null;
     private String password = null;
+    private String recipient, title, text;
 
 
     public MailService(){ }
@@ -30,13 +31,23 @@ public class MailService{
         return true;
     }
 
+    public void setMailData(String recipient, String title, String text){
+        this.recipient = recipient;
+        this.title = title;
+        this.text = text;
+    }
 
-    public void send(String recipient, String title, String text){
+
+
+    @Override
+    public void run() {
 
         if(password == null){
             throw new RuntimeException("Not logged in.");
         }
 
+
+       // System.out.println("inside mail thread");
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -66,6 +77,5 @@ public class MailService{
         } catch (Exception e) {
             throw new RuntimeException("Error sending mail.");
         }
-
     }
 }

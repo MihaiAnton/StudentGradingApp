@@ -12,33 +12,42 @@
         <URL value="@views.css" />
     </stylesheets>
     <children>
-      <Text layoutX="566.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports Menu">
+      <Text fill="#618be4" layoutX="566.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
          <font>
-            <Font size="20.0" />
+            <Font size="22.0" />
          </font>
       </Text>
        <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
-       <Button layoutX="347.0" layoutY="267.0" mnemonicParsing="false" onAction="#handleGenerateReport" text="Generate Report" />
-        <RadioButton fx:id="studGrades" layoutX="75.0" layoutY="99.0" mnemonicParsing="false" selected="true" text="Students' average grades" textFill="#eee8e8" />
-        <RadioButton fx:id="hardesHw" layoutX="75.0" layoutY="129.0" mnemonicParsing="false" selected="true" text="The hardest homework" textFill="#eee8e8" />
-        <RadioButton fx:id="examableStuds" layoutX="75.0" layoutY="160.0" mnemonicParsing="false" selected="true" text="Students able to enter the exam" textFill="#eee8e8" />
-        <RadioButton fx:id="ontimeStuds" layoutX="75.0" layoutY="190.0" mnemonicParsing="false" selected="true" text="Students that assigned on time" textFill="#eee8e8" />
-        <Label layoutX="447.0" layoutY="99.0" text="Report Name: " />
-        <TextField fx:id="name" layoutX="563.0" layoutY="94.0" prefHeight="31.0" prefWidth="180.0" />
-        <Label layoutX="483.0" layoutY="150.0" text="Location:" />
-        <TextField fx:id="locationTF" layoutX="563.0" layoutY="145.0" prefHeight="31.0" prefWidth="180.0" />
+        <RadioButton fx:id="studGrades" layoutX="75.0" layoutY="99.0" mnemonicParsing="false" selected="true" text="Students' average grades" textFill="#b9c6d3" />
+        <RadioButton fx:id="hardesHw" layoutX="75.0" layoutY="129.0" mnemonicParsing="false" selected="true" text="The hardest homework" textFill="#b9c6d3" />
+        <RadioButton fx:id="examableStuds" layoutX="75.0" layoutY="160.0" mnemonicParsing="false" selected="true" text="Students able to enter the exam" textFill="#b9c6d3" />
+        <RadioButton fx:id="ontimeStuds" layoutX="75.0" layoutY="190.0" mnemonicParsing="false" selected="true" text="Students that assigned on time" textFill="#b9c6d3" />
+        <Label layoutX="447.0" layoutY="99.0" text="Report Name: " textFill="#b9c6d3" />
+        <TextField fx:id="name" layoutX="563.0" layoutY="94.0" opacity="0.9" prefHeight="31.0" prefWidth="180.0" />
+        <Label layoutX="483.0" layoutY="150.0" text="Location:" textFill="#b9c6d3" />
+        <TextField fx:id="locationTF" layoutX="563.0" layoutY="145.0" opacity="0.9" prefHeight="31.0" prefWidth="180.0" />
         <TableView fx:id="table" layoutX="14.0" layoutY="270.0" opacity="0.0" prefHeight="224.0" prefWidth="309.0">
         <columns>
           <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
         </columns>
       </TableView>
-        <ImageView fitHeight="48.0" fitWidth="81.0" layoutX="727.0" layoutY="438.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Icons/backIcon.png" />
-            </image>
-        </ImageView>
-      <RadioButton fx:id="groupAvg" layoutX="75.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="Average grade for each group" textFill="#eee8e8" />
-      <RadioButton onMouseClicked="#pdfRadioButtonSelect" fx:id="pdfRB" layoutX="511.0" layoutY="201.0" mnemonicParsing="false" selected="true" text="PDF" />
-      <RadioButton onMouseClicked="#txtRadioButtonSelect" fx:id="txtRB" layoutX="598.0" layoutY="201.0" mnemonicParsing="false" text="Text" />
+      <RadioButton fx:id="groupAvg" layoutX="75.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="Average grade for each group" textFill="#b9c6d3" />
+      <RadioButton fx:id="pdfRB" layoutX="511.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#pdfRadioButtonSelect" selected="true" text="PDF" textFill="#b9c6d3" />
+      <RadioButton fx:id="txtRB" layoutX="598.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#txtRadioButtonSelect" text="Text" textFill="#b9c6d3" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="301.0" layoutY="222.0" onMouseClicked="#handleGenerateReport" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/reportClick.png" />
+         </image>
+      </ImageView>
+      <Text fill="#4ba2e4" layoutX="324.0" layoutY="391.0" onMouseClicked="#handleGenerateReport" strokeType="OUTSIDE" strokeWidth="0.0" text="GENERATE" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/back.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

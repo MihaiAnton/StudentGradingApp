@@ -35,7 +35,7 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <Text fill="#3b69a4" layoutX="528.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Homework Menu" textAlignment="CENTER" wrappingWidth="227.13671875">
+        <Text fill="#3b69a4" layoutX="528.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Homework" textAlignment="CENTER" wrappingWidth="227.13671875">
             <font>
                 <Font size="25.0" />
             </font>
@@ -62,30 +62,30 @@
         </VBox>
         <VBox layoutX="653.0" layoutY="99.0" prefHeight="200.0" prefWidth="122.0">
             <children>
-                <TextField fx:id="tid" prefHeight="25.0" prefWidth="119.0" />
+                <TextField fx:id="tid" opacity="0.9" prefHeight="25.0" prefWidth="119.0" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="115.13671875" />
-                <TextField fx:id="tdesc" />
+                <TextField fx:id="tdesc" opacity="0.9" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="116.13671875" />
-                <TextField fx:id="ttrgWeek" />
+                <TextField fx:id="ttrgWeek" opacity="0.9" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.13671875" />
-                <TextField fx:id="tddlWeek" />
+                <TextField fx:id="tddlWeek" opacity="0.9" />
             </children>
         </VBox>
         <HBox layoutX="542.0" layoutY="317.0" prefHeight="25.0" prefWidth="200.0">
             <children>
-                <Button fx:id="badd" mnemonicParsing="false" onAction="#handleAdd" prefHeight="25.0" prefWidth="52.0" text="Add" />
+                <Button fx:id="badd" mnemonicParsing="false" onAction="#handleAdd" opacity="0.64" prefHeight="25.0" prefWidth="52.0" text="Add" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
-                <Button fx:id="bupdate" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="25.0" prefWidth="59.0" text="Update" />
+                <Button fx:id="bupdate" mnemonicParsing="false" onAction="#handleUpdate" opacity="0.64" prefHeight="25.0" prefWidth="59.0" text="Update" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
-                <Button fx:id="bdelete" mnemonicParsing="false" onAction="#handleDelete" text="Delete" />
+                <Button fx:id="bdelete" mnemonicParsing="false" onAction="#handleDelete" opacity="0.64" text="Delete" />
             </children>
         </HBox>
-        <Button fx:id="bclear" layoutX="542.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleClear" prefHeight="31.0" prefWidth="85.0" text="Clear" />
-      <ImageView fitHeight="48.0" fitWidth="81.0" layoutX="727.0" layoutY="438.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icons/backIcon.png" />
-         </image>
-      </ImageView>
+        <Button fx:id="bclear" layoutX="542.0" layoutY="366.0" mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="31.0" prefWidth="85.0" text="Clear" />
+        <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Icons/back.png" />
+            </image>
+        </ImageView>
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
 
     </children>

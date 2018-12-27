@@ -43,6 +43,11 @@ public class StudentViewController extends TemplateController<Student>{
     public void setLoginController(LoginController loginController){this.mailLogin = loginController;}
 
     @FXML
+    public void handleLogin(){
+        this.mailLogin.show();
+    }
+
+    @FXML
     public void handleAdd(){
         try {
             Student s = getEntityFromFields();
@@ -189,7 +194,8 @@ public class StudentViewController extends TemplateController<Student>{
     public void handleGrade(){
 
         if(this.mailCheck.isSelected() && !this.getMailService().isLoggedIn()){
-            this.mailLogin.show();
+            handleError("Click on the Google icon to login or \n uncheck the mail button.");
+            //
         }
 
         else {
