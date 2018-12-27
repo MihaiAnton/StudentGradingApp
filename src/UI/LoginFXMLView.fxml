@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="308.0" prefWidth="276.0" style="-fx-border-color: #2776bb; -fx-border-width: 5px 5px 5px 5px;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.LoginController">
+   <children>
+      <ImageView fitHeight="48.0" fitWidth="143.0" layoutX="65.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/google.png" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="passwordField" layoutX="45.0" layoutY="181.0" promptText="Password:" />
+      <Button onMouseClicked="#handleLogin" layoutX="43.0" layoutY="222.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: #2776bb;" text="Sign in" textFill="WHITE" />
+      <TextField fx:id="email" layoutX="45.0" layoutY="139.0" promptText="Mail:" text="studentgrademanagerubb@gmail.com" />
+      <Text layoutX="25.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in with your Google Account." />
+      <ImageView fitHeight="41.0" fitWidth="47.0" layoutX="118.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/G.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

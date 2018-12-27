@@ -2,6 +2,8 @@
 
 
 import Repository.*;
+
+import Service.MailService;
 import Service.ReportService;
 import Service.SecurityService;
 import Service.TeacherService;
@@ -62,6 +64,7 @@ public class Main extends Application {
                                                            homeworkRepository,
                                                            gradeRepository);
 
+        teacherService.setMailService(getMailService());
 
         return teacherService;
     }
@@ -88,10 +91,12 @@ public class Main extends Application {
         return securityService;
     }
 
+    static MailService getMailService(){
+        return new MailService();
+    }
+
 
     public static void main(String[] args) {
-
-
 
 
         launch(args);

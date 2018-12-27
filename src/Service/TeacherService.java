@@ -28,6 +28,7 @@ public class TeacherService implements Observable<Event> {
 
     private String studentsPath = "M:\\School\\Metode Avansate de Programare\\StudentGradingApp\\src\\DataFiles\\Students\\";
     ArrayList<Observer> observers;
+    private MailService mailService;
 
     public TeacherService(GenericHashMapRepository<String, Student> sRepo,
                           GenericHashMapRepository<Integer, Homework> hRepo,
@@ -211,18 +212,24 @@ public class TeacherService implements Observable<Event> {
         }
     }
 
+    public MailService getMailService(){
+        return this.mailService;
+    }
 
     /**
      *
      * @param studentId
      * @param homeworkId
      * @param grade
+     * @param mailFlag
      * @throws RuntimeException
      */
-    public void assignGrade(String studentId, int homeworkId, double grade, int assignmentWeek, String feedback){
+    public void assignGrade(String studentId, int homeworkId, double grade, int assignmentWeek, String feedback, boolean mailFlag){
+
+
         try{
             addStudentHomework(studentId, homeworkId);
-            if(grade < 0 || grade > 10){
+            if(grade < 0 || grade > 10.1){
                 throw new Exception("Incorrect grade. Grade must be between 0 and 10.");
             }
 
@@ -252,6 +259,12 @@ public class TeacherService implements Observable<Event> {
             String filePath = studentsPath + student.getId() + ".txt";
             String text = "Homework: " + h.getId() + "\nAssigned in week: " + h.getAssignmentWeek() + "\nDeadline: " + h.getDeadlineWeek() + "\nFeedback: " + feedback + "\n\n";
 
+            if(mailFlag){
+                this.sendMail(grade1.getStudId(), text);
+            }
+
+
+
             File f = new File(filePath);
             try{f.createNewFile();}
             catch (Exception e){}
@@ -267,6 +280,20 @@ public class TeacherService implements Observable<Event> {
         catch(Exception e){
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    private void sendMail(String studId, String text) {
+        Student s = studentRepo.findOne(studId);
+        if(s == null){
+            return;
+        }
+        else{
+            this.mailService.send(s.getEmail(),"Grade notification",text);
+        }
+    }
+
+    public void setMailService(MailService mailService){
+        this.mailService = mailService;
     }
 
 

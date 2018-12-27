@@ -11,28 +11,78 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" />
+          <root url="jar://C:/Program Files/Java/javax.mail.jar!/" />
+          <root url="file://C:/Program Files/Java/iText7-Core-7.1.4" />
+          <root url="file://C:/Program Files/Java/itext5-5.5.12" />
+          <root url="file://C:/Program Files/Java" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" />
+          <root url="file://C:/Program Files/Java/iText7-Core-7.1.4" />
+          <root url="file://C:/Program Files/Java/itext5-5.5.12" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/Animator" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/ArcTest" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/BarChart" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/Blink" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/CardTest" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/Clock" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/DitherTest" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/DrawTest" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/Fractal" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/GraphLayout" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/GraphicsTest" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/JumpingBox" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/MoleculeViewer" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/NervousText" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/SimpleGraph" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/SortDemo" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/SpreadSheet" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/TicTacToe" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/applets/WireFrame" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/3DViewer/src/main/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/3DViewer/src/test/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/Ensemble8/src/app/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/Ensemble8/src/compiletime/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/Ensemble8/src/generated/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/Ensemble8/src/samples/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/MandelbrotSet/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/javafx_samples/src/Modena/src/main/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/demo/nio/zipfs" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/annotations/DependencyChecker/PluginChecker/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/annotations/DependencyChecker/Plugins/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/annotations/Validator/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/forkjoin/mergesort" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jmx/jmx-scandir/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jmx/jmx-scandir/test" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/corba/src/core" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/corba/src/stubs" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/jreinstaller/src/share/classes" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/raf/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/servlet/apps/app1/src/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/servlet/apps/app2/src/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/servlet/apps/app3/src/java" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/servlet/src/classes" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/webpad/src/servlet" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/jnlp/webpad/src/version1" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/lambda/BulkDataOperations/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/lambda/DefaultMethods" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/nio/chatserver" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/nio/file" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/nio/multicast" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/nio/server" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/scripting/scriptpad/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/try-with-resources/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/webservices/EbayClient/src" />
+          <root url="file://C:/Program Files/Java/jdk1.8.0_192/sample/webservices/EbayServer/src" />
         </SOURCES>
-        <jarDirectory url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" recursive="false" />
-        <jarDirectory url="file://$USER_HOME$/Downloads/iText7-Core-7.1.4" recursive="false" type="SOURCES" />
+        <jarDirectory url="file://C:/Program Files/Java" recursive="false" />
+        <jarDirectory url="file://C:/Program Files/Java/itext5-5.5.12" recursive="false" />
+        <jarDirectory url="file://C:/Program Files/Java/iText7-Core-7.1.4" recursive="false" />
+        <jarDirectory url="file://C:/Program Files/Java/itext5-5.5.12" recursive="false" type="SOURCES" />
+        <jarDirectory url="file://C:/Program Files/Java/iText7-Core-7.1.4" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$USER_HOME$/Downloads/itext5-5.5.12" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$USER_HOME$/Downloads/itext5-5.5.12" />
-        </SOURCES>
-        <jarDirectory url="file://$USER_HOME$/Downloads/itext5-5.5.12" recursive="false" />
-        <jarDirectory url="file://$USER_HOME$/Downloads/itext5-5.5.12" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="com" level="project" />
   </component>
 </module>

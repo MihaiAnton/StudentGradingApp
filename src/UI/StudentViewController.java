@@ -3,6 +3,7 @@ package UI;
 
 import Domain.Student;
 import Exceptions.ValidationException;
+import Service.MailService;
 import Service.SecurityService;
 import Utils.Events.Event;
 import Utils.Events.SecurityEvent;
@@ -25,7 +26,7 @@ public class StudentViewController extends TemplateController<Student>{
     TextField id, name, group, mail, teacher;
 
     @FXML
-    RadioButton missingReason;
+    RadioButton missingReason, mailCheck;
 
     @FXML
     TextField students, hid, week, fback, grade;
@@ -34,11 +35,12 @@ public class StudentViewController extends TemplateController<Student>{
     Text loginStatus;
 
     private SecurityService securityService;
+    private LoginController mailLogin;
 
     public void setSecurityService(SecurityService securityService){
         this.securityService = securityService;
     }
-
+    public void setLoginController(LoginController loginController){this.mailLogin = loginController;}
 
     @FXML
     public void handleAdd(){
@@ -52,6 +54,10 @@ public class StudentViewController extends TemplateController<Student>{
         catch(Exception e){
             handleError(e.getMessage());
         }
+    }
+
+    public MailService getMailService(){
+        return service.getMailService();
     }
 
     @FXML
@@ -181,64 +187,72 @@ public class StudentViewController extends TemplateController<Student>{
 
     @FXML
     public void handleGrade(){
-        try {
-            Double gr = Double.parseDouble(grade.getText());
-            int week = Integer.parseInt(this.week.getText());
-            String feedback = fback.getText();
-            int hid = Integer.parseInt(this.hid.getText());
-            String students = this.students.getText();
 
-            if (service.findHomework(hid) == null) {
-                throw new ValidationException("Inexistent Homework.");
-            }
+        if(this.mailCheck.isSelected() && !this.getMailService().isLoggedIn()){
+            this.mailLogin.show();
+        }
 
-            if (week < 0 || week > 14) {
-                throw new ValidationException("Incorrect week value.");
-            }
+        else {
+            try {
+                Double gr = Double.parseDouble(grade.getText());
+                int week = Integer.parseInt(this.week.getText());
+                String feedback = fback.getText();
+                int hid = Integer.parseInt(this.hid.getText());
+                String students = this.students.getText();
 
-            if(gr < 1 || gr > 10){
-                throw new ValidationException("Incorrect grade value.");
-            }
-
-            if (missingReason.isSelected()) {
-                week = service.findHomework(hid).getTargetWeek();
-            }
-
-            service.findHomework(hid).setAssignmentWeek(week);
-            service.findHomework(hid).setGrade(gr);
-            gr = service.findHomework(hid).getGrade();
-
-            String[] sIds = students.split(",");
-
-            for (String s : sIds) {
-                Student student = searchStudent(s);
-                if (student == null) {
-
-                    gradeConfirmation("Can't find student " + s + ".");
+                if (service.findHomework(hid) == null) {
+                    throw new ValidationException("Inexistent Homework.");
                 }
-                else{
-                    try{
-                        if(service.findGrade(student.getId(), hid) != null){
-                            throw new Exception("Grade already exists.");
-                        }
-                        else {
 
-                            service.assignGrade(student.getId(), hid, gr, week, feedback);
-                            gradeConfirmation("Student " + student.getName() + " graded " + gr + " at homework " + hid + ".");
+                if (week < 0 || week > 14) {
+                    throw new ValidationException("Incorrect week value.");
+                }
+
+                if (gr < 1 || gr > 10) {
+                    throw new ValidationException("Incorrect grade value.");
+                }
+
+                if (missingReason.isSelected()) {
+                    week = service.findHomework(hid).getTargetWeek();
+                }
+
+                service.findHomework(hid).setAssignmentWeek(week);
+                service.findHomework(hid).setGrade(gr);
+                gr = service.findHomework(hid).getGrade();
+
+                String[] sIds = students.split(",");
+
+                for (String s : sIds) {
+                    Student student = searchStudent(s);
+                    if (student == null) {
+
+                        gradeConfirmation("Can't find student " + s + ".");
+                    } else {
+                        try {
+                            if (service.findGrade(student.getId(), hid) != null) {
+                                throw new Exception("Grade already exists.");
+                            } else {
+                                boolean mailFlag = false;
+                                if(mailCheck.isSelected()){
+                                    mailFlag = true;
+                                }
+
+                                service.assignGrade(student.getId(), hid, gr, week, feedback,mailFlag);
+                                gradeConfirmation("Student " + student.getName() + " graded " + gr + " at homework " + hid + ".");
+
+                            }
+                        } catch (Exception e) {
+                            gradeConfirmation(e.getMessage());
                         }
                     }
-                    catch (Exception e){
-                        gradeConfirmation(e.getMessage());
-                    }
                 }
+            } catch (ValidationException ve) {
+                handleError("Invalid data: " + "\n" + ve.getMessage());
+            } catch (Exception e) {
+                handleError("Error grading.");
             }
         }
-        catch(ValidationException ve){
-            handleError("Invalid data: " + "\n" + ve.getMessage());
-        }
-        catch(Exception e){
-            handleError("Error grading.");
-        }
+
     }
 
     private Student searchStudent(String s) {

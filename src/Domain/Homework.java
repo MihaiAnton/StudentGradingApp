@@ -82,6 +82,10 @@ public class Homework implements IdEntity<Integer>{
             newGrade = 1;
         }
 
+        if(newGrade > 10){
+            return 10;
+        }
+
         return newGrade;
 
     }

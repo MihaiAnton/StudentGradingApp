@@ -30,7 +30,7 @@ public class MainController {
     private TeacherService teacherService;
     private SecurityService securityService;
     private ReportService reportService;
-    private Stage studentStage, homeworkStage, gradesStage, reportStage;
+    private Stage studentStage, homeworkStage, gradesStage, reportStage, googleLoginStage;
 
     private Stage thisStage;
 
@@ -77,6 +77,24 @@ public class MainController {
         password.clear();
     }
 
+    private LoginController getGoogleLoginController(){
+        try{
+            this.googleLoginStage = new Stage();
+            FXMLLoader loaderLogin = new FXMLLoader(getClass().getResource("LoginFXMLView.fxml"));
+            Pane loginPane = loaderLogin.load();
+            LoginController ctrl = loaderLogin.getController();
+
+            googleLoginStage.setScene(new Scene(loginPane));
+            ctrl.setStage(googleLoginStage);
+            googleLoginStage.initStyle(StageStyle.UNDECORATED);
+            return ctrl;
+        }
+        catch(Exception e){
+
+        }
+        return null;
+    }
+
     private void initComponents(){
 
         try {
@@ -93,6 +111,16 @@ public class MainController {
                 studentStage.setScene(new Scene(leftPane));
                 studentViewController.setStage(studentStage);
                 studentStage.initStyle(StageStyle.UNDECORATED);
+
+                //login substage
+                LoginController loginController = getGoogleLoginController();
+                studentViewController.setLoginController(loginController);
+                if(loginController == null){
+                    System.out.println("Error creating login scene.");
+                }
+                else{
+                    loginController.setMailService(studentViewController.getMailService());
+                }
 
             }catch(Exception e){}
 

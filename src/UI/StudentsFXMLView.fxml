@@ -151,6 +151,7 @@
          </image>
       </ImageView>
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
+      <RadioButton fx:id="mailCheck" layoutX="478.0" layoutY="437.0" mnemonicParsing="false" selected="true" text="Send mail" />
 
     </children>
 </AnchorPane>
