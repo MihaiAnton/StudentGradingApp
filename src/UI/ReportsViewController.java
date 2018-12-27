@@ -22,7 +22,10 @@ public class ReportsViewController extends TemplateController<String>{
     TextField locationTF;
 
     @FXML
-    RadioButton studGrades, hardesHw, examableStuds, ontimeStuds;
+    RadioButton studGrades, hardesHw, examableStuds, ontimeStuds, groupAvg;
+
+    @FXML
+    RadioButton txtRB, pdfRB;
 
 
     private ReportService reportsService;
@@ -42,7 +45,8 @@ public class ReportsViewController extends TemplateController<String>{
     public void setReportsService(ReportService reportsService){
         this.reportsService = reportsService;
         this.locationTF.setText("C:\\Users\\mihai\\Desktop\\");
-        this.name.setText("report.pdf");
+        this.name.setText("report");
+        this.pdfRB.setSelected(true);
     }
 
 
@@ -70,15 +74,24 @@ public class ReportsViewController extends TemplateController<String>{
         if(this.hardesHw.isSelected()) reportCode |= 2;
         if(this.examableStuds.isSelected()) reportCode |= 4;
         if(this.ontimeStuds.isSelected()) reportCode |= 8;
+        if(this.groupAvg.isSelected()) reportCode |= 16;
 
-        try {
-            this.reportsService.createPDFReport(name.getText(), locationTF.getText(), reportCode);
-            reportConfirmation("Report '" + name.getText() + "' created successfully.");
+        if(this.pdfRB.isSelected()) {
+            try {
+                this.reportsService.createPDFReport(name.getText() + ".pdf", locationTF.getText(), reportCode);
+                reportConfirmation("Report '" + name.getText() + "' created successfully.");
+            } catch (Exception e) {
+                handleError("Error generating report.");
+            }
         }
-        catch(Exception e){
-            handleError("Error generating report.");
+        else if(this.txtRB.isSelected()){
+            try{
+                this.reportsService.createTxtReport(name.getText() + ".txt",locationTF.getText(), reportCode);
+            }
+            catch(Exception e){
+                handleError("Error generating report.");
+            }
         }
-
     }
 
     private void reportConfirmation(String text){
@@ -86,6 +99,16 @@ public class ReportsViewController extends TemplateController<String>{
         msg.setTitle("Report confirmation.");
         msg.setContentText(text);
         msg.showAndWait();
+    }
+
+    @FXML
+    public void txtRadioButtonSelect(){
+        this.pdfRB.setSelected(false);
+    }
+
+    @FXML
+    public void pdfRadioButtonSelect(){
+        this.txtRB.setSelected(false);
     }
 
 

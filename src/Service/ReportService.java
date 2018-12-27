@@ -14,7 +14,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.*;
+import java.util.function.Consumer;
 
 
 public class ReportService {
@@ -24,6 +26,18 @@ public class ReportService {
     public int HARDEST_HOMEWORK = 2;
     public int EXAMABLE_STUDENTS = 4;
     public int ON_TIME_STUDENTS = 8;
+
+    private double setPrecision(double nr, int precision){
+        int tenPwr = 1;
+        for(int i=1;i<=precision;i++){
+            tenPwr *= 10;
+        }
+
+        nr = nr * tenPwr;
+
+        int auxNr = (int)(nr);
+        return (double)((double)auxNr*(1.0/tenPwr));
+    }
 
     public ReportService(TeacherService teacherService){
         this.teacherService = teacherService;
@@ -60,7 +74,7 @@ public class ReportService {
                 count = count + ponder;
             }
 
-            String rez = "Id: " + studentId + " Name: " + studentName + " - average grade = " + sum/count;
+            String rez = "Id: " + studentId + " Name: " + studentName + " - average grade = " + setPrecision(sum/count,2);
             result.add(rez);
         }
         return result;
@@ -172,6 +186,39 @@ public class ReportService {
        return result;
     }
 
+    public List<String> reportGroupAvg(){
+
+        List<String> result = new ArrayList<>();
+        Set<Integer> groups = new HashSet<>();
+
+        for (Grade g:teacherService.getAllGrades()) {
+            groups.add(g.getStudGroup());
+        }
+
+        for (Integer gr:groups) {
+            double sum = 0;
+            int count = 0;
+
+            for (Grade g:teacherService.getAllGrades()) {
+                Homework h = teacherService.findHomework(g.getHomeworkId());
+                if(h == null || g.getStudGroup() != gr){
+                    continue;
+                }
+
+                int ponder = h.getDeadlineWeek() - h.getTargetWeek() + 1;
+                sum += ponder * g.getGrade();
+                count += ponder;
+            }
+
+            if(sum > 0) {
+                result.add("Group " + gr + ": " + setPrecision(sum/count,2));
+            }
+
+        }
+
+        return result;
+    }
+
     public void createPDFReport(String name, String dest,int reportsCode){
         try {
             if(reportsCode == 0)
@@ -210,6 +257,13 @@ public class ReportService {
                 }
             }
 
+            if((reportsCode & 16) > 0){
+                document.add(new Paragraph("\n\nAverage grade for each group:\n\n"));
+                for(String s: reportGroupAvg()){
+                    document.add(new Paragraph(s));
+                }
+            }
+
             document.close();
 
 
@@ -217,6 +271,53 @@ public class ReportService {
         catch(Exception e){
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    public void createTxtReport(String name, String dest, int reportsCode){
+
+        try(PrintWriter writer = new PrintWriter(dest + name)){
+
+
+            if((reportsCode & 1) > 0) {
+                writer.println("\n\nAverage grades:\n\n");
+                for (String s : reportStudentsAverage()) {
+                    writer.println(s);
+                }
+            }
+
+            if((reportsCode & 2) > 0) {
+               writer.println("\n\nHardest homework:\n\n");
+                writer.println(this.reportHarderstHomework());
+            }
+
+            if((reportsCode & 4) > 0) {
+                writer .println("\n\nStudents able to take the exam:\n\n");
+                for (String s : reportExamAbleStudents()) {
+                    writer.println(s);
+                }
+            }
+
+            if((reportsCode & 8) > 0) {
+                writer.println("\n\nStudents that assigned the homework on time:\n\n");
+                for (String s : reportOnTimeStudents()) {
+                    writer.println(s);
+                }
+            }
+
+            if((reportsCode & 16) > 0){
+                writer.println("\n\nAverage grade for each group:\n\n");
+                for(String s: reportGroupAvg()){
+                    writer.println(s);
+                }
+            }
+
+
+        }
+        catch(Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+
+
     }
 
 

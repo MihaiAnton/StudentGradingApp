@@ -37,5 +37,8 @@
                 <Image url="@Icons/backIcon.png" />
             </image>
         </ImageView>
+      <RadioButton fx:id="groupAvg" layoutX="75.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="Average grade for each group" textFill="#eee8e8" />
+      <RadioButton onMouseClicked="#pdfRadioButtonSelect" fx:id="pdfRB" layoutX="511.0" layoutY="201.0" mnemonicParsing="false" selected="true" text="PDF" />
+      <RadioButton onMouseClicked="#txtRadioButtonSelect" fx:id="txtRB" layoutX="598.0" layoutY="201.0" mnemonicParsing="false" text="Text" />
    </children>
 </AnchorPane>
