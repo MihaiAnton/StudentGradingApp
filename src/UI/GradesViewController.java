@@ -4,13 +4,17 @@ import Domain.AccesRight;
 import Domain.Grade;
 import Domain.Homework;
 import Domain.Student;
+import Exceptions.ValidationException;
+import Service.MailService;
 import Service.SecurityService;
 import Service.TeacherService;
 import Utils.Events.Event;
 import Utils.Events.SecurityEvent;
 import Utils.Events.ServiceEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -35,12 +39,31 @@ public class GradesViewController extends TemplateController<Grade>{
     @FXML
     Text loginStatus;
 
+    @FXML
+    RadioButton missingReason, mailCheck;
+
+    @FXML
+    TextField students, hid, week, fback, grade;
+
     private SecurityService securityService;
+    private LoginController mailLogin;
 
     public void setSecurityService(SecurityService securityService){
 
         this.securityService = securityService;
     }
+
+    public void setLoginController(LoginController loginController){this.mailLogin = loginController;}
+
+    @FXML
+    public void handleLogin(){
+        this.mailLogin.show();
+    }
+
+    public MailService getMailService(){
+        return service.getMailService();
+    }
+
 
     @Override
     public void setService(TeacherService service){
@@ -106,7 +129,11 @@ public class GradesViewController extends TemplateController<Grade>{
     }
 
     @Override
-    public void updateFields(Grade newValue) {}
+    public void updateFields(Grade newValue) {
+
+        this.students.setText(newValue.getStudName());
+        this.studentId.setText(newValue.getStudName());
+    }
 
     @Override
     public Grade getEntityFromFields(){return null;}
@@ -154,10 +181,10 @@ public class GradesViewController extends TemplateController<Grade>{
             }
         }
 
-        //student id
+        //student name
         ArrayList<Grade> filtered2 = new ArrayList<>();
         for (Grade g: filtered1) {
-            if (studentId.getText() == null || studentId.getText().equals("") || g.getStudId().matches(studentId.getText() + ".*")) {//studentField.getText().equals(g.getStudId())){
+            if (studentId.getText() == null || studentId.getText().equals("") || g.getStudId().matches(studentId.getText() + ".*") || g.getStudName().matches(studentId.getText() + ".*")) {//studentField.getText().equals(g.getStudId())){
 
                 filtered2.add(g);
             }
@@ -226,6 +253,113 @@ public class GradesViewController extends TemplateController<Grade>{
             }
         });
     }
+
+    @FXML
+    public void handleGrade(){
+
+        if(this.mailCheck.isSelected() && !this.getMailService().isLoggedIn()){
+            handleError("Click on the Google icon to login or \n uncheck the mail button.");
+            //
+        }
+
+        else {
+            try {
+                Double gr = Double.parseDouble(grade.getText());
+                int week = Integer.parseInt(this.week.getText());
+                String feedback = fback.getText();
+                int hid = Integer.parseInt(this.hid.getText());
+                String students = this.students.getText();
+
+                if (service.findHomework(hid) == null) {
+                    throw new ValidationException("Inexistent Homework.");
+                }
+
+                if (week < 0 || week > 14) {
+                    throw new ValidationException("Incorrect week value.");
+                }
+
+                if (gr < 1 || gr > 10) {
+                    throw new ValidationException("Incorrect grade value.");
+                }
+
+                if (missingReason.isSelected()) {
+                    week = service.findHomework(hid).getTargetWeek();
+                }
+
+                service.findHomework(hid).setAssignmentWeek(week);
+                service.findHomework(hid).setGrade(gr);
+                gr = service.findHomework(hid).getGrade();
+
+                String[] sIds = students.split(",");
+
+                for (String s : sIds) {
+                    Student student = searchStudent(s);
+                    if (student == null) {
+
+                        gradeConfirmation("Can't find student " + s + ".");
+                    } else {
+                        try {
+                            if (service.findGrade(student.getId(), hid) != null) {
+                                throw new Exception("Grade already exists.");
+                            } else {
+                                boolean mailFlag = false;
+                                if(mailCheck.isSelected()){
+                                    mailFlag = true;
+                                }
+
+                                service.assignGrade(student.getId(), hid, gr, week, feedback,mailFlag);
+                                gradeConfirmation("Student " + student.getName() + " graded " + gr + " at homework " + hid + ".");
+
+                            }
+                        } catch (Exception e) {
+                            gradeConfirmation(e.getMessage());
+                        }
+                    }
+                }
+            } catch (ValidationException ve) {
+                handleError("Invalid data: " + "\n" + ve.getMessage());
+            } catch (Exception e) {
+                handleError("Error grading.");
+            }
+            handleClear();
+            handleFilter();
+        }
+
+    }
+
+    public void gradeConfirmation(String text){
+        Alert msg = new Alert(Alert.AlertType.CONFIRMATION);
+        msg.setTitle("Grade confirmation.");
+        msg.setContentText(text);
+        msg.showAndWait();
+    }
+
+    private Student searchStudent(String s) {
+
+        for(Student st:service.getStudents()){
+            if(s.equals(st.getId()) || st.getName().matches(s + ".*")){
+                return st;
+            }
+        }
+        return null;
+    }
+
+    @FXML
+    public void filterOnWriteGrade(){
+
+        String name = students.getText();
+        handleClear();
+        studentId.setText(name);
+        handleFilter();
+    }
+
+    @FXML
+    public void filterOnWriteSearch(){
+        String name = studentId.getText();
+        students.setText(name);
+        handleFilter();
+    }
+
 
 
 }

@@ -45,9 +45,9 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Label layoutX="90.0" layoutY="75.0" text="Student grade manager" textFill="#848990" textOverrun="LEADING_WORD_ELLIPSIS">
+      <Label layoutX="87.0" layoutY="89.0" text="Student grade manager" textFill="#848990" textOverrun="LEADING_WORD_ELLIPSIS">
          <font>
-            <Font name="Arial Bold" size="25.0" />
+            <Font name="Arial Bold" size="28.0" />
          </font>
       </Label>
         <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#handleExit" pickOnBounds="true" preserveRatio="true">
@@ -55,8 +55,8 @@
                 <Image url="@Icons/back.png" />
             </image>
         </ImageView>
-      <TextField fx:id="username" layoutX="616.0" layoutY="23.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8eafe5;" />
-        <PasswordField fx:id="password" layoutX="616.0" layoutY="60.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8eafe5;" />
+      <TextField fx:id="username" layoutX="616.0" layoutY="23.0" prefHeight="31.0" prefWidth="150.0" promptText="Username" style="-fx-background-color: #5d90c3;" />
+        <PasswordField fx:id="password" layoutX="616.0" layoutY="60.0" opacity="0.8" prefHeight="31.0" prefWidth="150.0" promptText="Password" style="-fx-background-color: #333333;" />
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
       <HBox layoutX="569.0" layoutY="105.0" prefHeight="31.0" prefWidth="215.0">
          <children>
@@ -86,7 +86,7 @@
             <Image url="@Icons/usericon2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="36.0" layoutX="571.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="lockPic" fitHeight="31.0" fitWidth="36.0" layoutX="571.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/pass2.png" />
          </image>

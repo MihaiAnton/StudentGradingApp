@@ -18,7 +18,7 @@
         <URL value="@views.css" />
     </stylesheets>
     <children>
-        <TableView fx:id="table" layoutX="14.0" layoutY="73.0" prefHeight="388.0" prefWidth="394.0" style="-fx-background-color: #d9d9d9;" stylesheets="@tables.css">
+        <TableView fx:id="table" layoutX="14.0" layoutY="99.0" prefHeight="302.0" prefWidth="394.0" style="-fx-background-color: #d9d9d9;" stylesheets="@tables.css">
             <columns>
                 <TableColumn prefWidth="49.0" text="Id">
                     <cellValueFactory><PropertyValueFactory property="id" />
@@ -49,7 +49,7 @@
                 <Font size="25.0" />
             </font>
         </Text>
-        <VBox layoutX="456.0" layoutY="46.0" prefHeight="235.0" prefWidth="85.0">
+        <VBox layoutX="456.0" layoutY="73.0" prefHeight="235.0" prefWidth="85.0">
             <children>
                 <Label prefHeight="35.0" prefWidth="88.0" text="Id:" textAlignment="CENTER" textFill="#98cae4">
                <font>
@@ -73,7 +73,7 @@
                </font></Label>
             </children>
         </VBox>
-        <VBox layoutX="574.0" layoutY="46.0" prefHeight="235.0" prefWidth="151.0">
+        <VBox layoutX="574.0" layoutY="73.0" prefHeight="235.0" prefWidth="151.0">
             <children>
                 <TextField fx:id="id" opacity="0.9" prefHeight="25.0" prefWidth="119.0" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="115.13671875" />
@@ -86,7 +86,7 @@
                 <TextField fx:id="teacher" opacity="0.9" />
             </children>
         </VBox>
-        <HBox layoutX="456.0" layoutY="250.0" prefHeight="31.0" prefWidth="296.0">
+        <HBox layoutX="456.0" layoutY="345.0" prefHeight="31.0" prefWidth="296.0">
             <children>
                 <Button mnemonicParsing="false" onAction="#handleAdd" opacity="0.64" prefHeight="31.0" prefWidth="56.0" text="Add" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="15.0" />
@@ -97,70 +97,12 @@
               <Button mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="31.0" prefWidth="59.0" text="Clear" />
             </children>
         </HBox>
-      <VBox layoutX="456.0" layoutY="296.0" prefHeight="141.0" prefWidth="112.0">
-         <children>
-            <Label text="Students:" textFill="#98cae4">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <Separator opacity="0.0" prefHeight="21.0" prefWidth="100.0" />
-            <Label prefHeight="25.0" prefWidth="118.0" text="Homework ID:" textFill="#98cae4">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <Separator opacity="0.0" prefHeight="20.0" prefWidth="100.0" />
-            <Label prefHeight="21.0" prefWidth="74.0" text="Week:" textFill="#98cae4">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <Separator opacity="0.0" prefHeight="19.0" prefWidth="100.0" />
-            <Label text="Feedback:" textFill="#98cae4">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <Separator opacity="0.0" prefHeight="21.0" prefWidth="100.0" />
-            <Label text="Grade:" textFill="#98cae4">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-         </children>
-      </VBox>
-      <VBox layoutX="574.0" layoutY="296.0" prefHeight="167.0" prefWidth="118.0">
-         <children>
-            <TextField fx:id="students" opacity="0.9" />
-            <Separator opacity="0.0" prefWidth="200.0" />
-            <TextField fx:id="hid" opacity="0.9" />
-            <Separator opacity="0.0" prefWidth="200.0" />
-            <TextField fx:id="week" opacity="0.9" />
-            <Separator opacity="0.0" prefWidth="200.0" />
-            <TextField fx:id="fback" opacity="0.9" />
-            <Separator opacity="0.0" prefWidth="200.0" />
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <TextField fx:id="grade" opacity="0.9" prefHeight="31.0" prefWidth="172.0" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-      <Separator layoutX="478.0" layoutY="284.0" opacity="0.0" prefHeight="12.0" prefWidth="304.0" />
-      <Button layoutX="591.0" layoutY="459.0" mnemonicParsing="false" onAction="#handleGrade" opacity="0.64" prefHeight="31.0" prefWidth="100.0" text="Grade" />
         <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Icons/back.png" />
             </image>
         </ImageView>
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
-      <VBox layoutX="456.0" layoutY="449.0" prefHeight="50.0" prefWidth="135.0">
-         <children>
-            <RadioButton fx:id="mailCheck" mnemonicParsing="false" selected="true" text="Send mail" textFill="#98cae4" />
-            <RadioButton fx:id="missingReason" mnemonicParsing="false" prefHeight="21.0" prefWidth="136.0" text="Missing reason" textFill="#98cae4" />
-         </children>
-      </VBox>
-      <ImageView fitHeight="50.0" fitWidth="61.0" layoutX="728.0" layoutY="353.0" onMouseClicked="#handleLogin" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Icons/G.png" />
-         </image>
-      </ImageView>
 
     </children>
 </AnchorPane>
