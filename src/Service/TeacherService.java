@@ -86,6 +86,14 @@ public class TeacherService implements Observable<Event> {
         }
     }
 
+    public boolean hasGradeAssigned(String studentId){
+        for (Grade g:this.gradeRepo.findAll()) {
+            if(g.getStudId().equals(studentId))
+                return true;
+        }
+        return false;
+    }
+
     /**
      *
      * @param id

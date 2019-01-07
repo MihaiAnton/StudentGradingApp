@@ -71,10 +71,18 @@ public class StudentViewController extends TemplateController<Student>{
     public void handleDelete(){
         try{
             Student s = getEntityFromFields();
-            if(this.service.deleteStudent(s.getId()) != null) {
-                this.service.notifyObserver(new ServiceEvent("student",
-                                                            new StudentEvent("delete", s)));
+            if(this.service.findStudent(s.getId()) != null){
+                if(this.service.hasGradeAssigned(s.getId())){
+                    handleError("Can't delete " + s.getName() + ".\nGrades assigned to the student.");
+                }
+                else {
+                    if (this.service.deleteStudent(s.getId()) != null) {
+                        this.service.notifyObserver(new ServiceEvent("student",
+                                new StudentEvent("delete", s)));
+                    }
+                }
             }
+
         }
         catch(Exception e){
             handleError(e.getMessage());
