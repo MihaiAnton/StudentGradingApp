@@ -13,6 +13,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -39,6 +41,9 @@ public class MainController {
     private Clock clock;
 
     @FXML
+    private ImageView lockPic;
+
+    @FXML
     private Text loginStatus,clockText;
     @FXML
     private TextField username;
@@ -61,6 +66,8 @@ public class MainController {
 
     public void setServices(TeacherService teacherService, SecurityService securityService, ReportService reportService){
 
+        username.setStyle("-fx-text-inner-color: #e6e6e6;-fx-background-color: #333333;");
+        password.setStyle("-fx-text-inner-color: #e6e6e6;-fx-background-color: #333333;");
         this.teacherService = teacherService;
         this.securityService = securityService;
         this.reportService = reportService;
@@ -117,15 +124,6 @@ public class MainController {
                 studentViewController.setStage(studentStage);
                 studentStage.initStyle(StageStyle.UNDECORATED);
 
-                //login substage
-                LoginController loginController = getGoogleLoginController();
-                studentViewController.setLoginController(loginController);
-                if(loginController == null){
-                    System.out.println("Error creating login scene.");
-                }
-                else{
-                    loginController.setMailService(studentViewController.getMailService());
-                }
 
             }catch(Exception e){}
 
@@ -157,6 +155,16 @@ public class MainController {
                 gradesStage.setScene(new Scene(gradePane));
                 gradesViewController.setStage(gradesStage);
                 gradesStage.initStyle(StageStyle.UNDECORATED);
+
+                //login substage
+                LoginController loginController = getGoogleLoginController();
+                gradesViewController.setLoginController(loginController);
+                if(loginController == null){
+                    System.out.println("Error creating login scene.");
+                }
+                else{
+                    loginController.setMailService(gradesViewController.getMailService());
+                }
             }
             catch(Exception e){
                 System.out.println(e.getMessage());
@@ -262,8 +270,10 @@ public class MainController {
                 loginStatusText = "Logged in as " + username.getText() + ".";
                 String name = username.getText();
                 initSecurityFeatures();
+                this.lockPic.setImage(new Image("UI/Icons/pass2.png"));
                 handleConfirmation("Logged in as " + name + ".", "Login confirmation");
                 this.securityService.notifyObserver(new SecurityEvent(null, "security"));
+
             } catch (SecurityException e) {
                 handleError(e.getMessage());
             } catch (Exception e) {
@@ -276,8 +286,10 @@ public class MainController {
                 this.logBtn.setText("Login");
                 loginStatusText = "Not logged in.";
                 initSecurityFeatures();
+                this.lockPic.setImage(new Image("UI/Icons/lock.png"));
                 handleConfirmation("Successfully logged out.","Logout confirmation.");
                 this.securityService.notifyObserver(new SecurityEvent(null,"security"));
+
             }
             catch (SecurityException e){
                 handleError(e.getMessage());
