@@ -44,9 +44,11 @@ public abstract class XMLRepository<ID, E extends IdEntity<ID>> extends StorageR
 
                 Element item = (Element)nodeList.item(i);
 
-                E entity = getEntityFromElement(item, document);
-
-                save(entity);
+                try {
+                    E entity = getEntityFromElement(item, document);
+                    save(entity);
+                }
+                catch(Exception e){}
 
             }
 

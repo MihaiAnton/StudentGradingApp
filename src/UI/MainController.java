@@ -32,6 +32,7 @@ public class MainController {
     private SecurityService securityService;
     private ReportService reportService;
     private Stage studentStage, homeworkStage, gradesStage, reportStage, googleLoginStage;
+    private GradesViewController gradesViewController;
 
     private Stage thisStage;
 
@@ -149,7 +150,7 @@ public class MainController {
                 this.gradesStage = new Stage();
                 FXMLLoader loaderGrades = new FXMLLoader(getClass().getResource("GradesFXMLView.fxml"));
                 Pane gradePane =  loaderGrades.load();
-                GradesViewController gradesViewController = loaderGrades.getController();
+                this.gradesViewController = loaderGrades.getController();
                 gradesViewController.setSecurityService(this.securityService);
                 gradesViewController.setService(teacherService);
 
@@ -222,6 +223,7 @@ public class MainController {
         AccesRight[] neededRight = {ADMIN, FULL, RESTRICTED};
 
         if(securityService.grantAcces(neededRight)){
+            this.gradesViewController.onOpen();
             gradesStage.show();
         }
         else{

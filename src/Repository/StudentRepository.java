@@ -14,20 +14,33 @@ public class StudentRepository extends XMLRepository<String, Student> {
 
     @Override
     protected Student getEntityFromElement(Element item, Document document) {
-        String id = item.getAttribute("id");
+        String id = "";
+        String name = "";
+        String email = "";
+        String teacher = "";
+
+
+        id = item.getAttribute("id");
         NodeList nodeList;
 
         nodeList = item.getElementsByTagName("name");
-        String name = nodeList.item(0).getChildNodes().item(0).getNodeValue();
+        if(nodeList.item(0).getChildNodes().getLength() > 0) {
+            name = nodeList.item(0).getChildNodes().item(0).getNodeValue();
+        }
 
         nodeList = item.getElementsByTagName("group");
         int group = Integer.parseInt(nodeList.item(0).getChildNodes().item(0).getNodeValue());
 
         nodeList = item.getElementsByTagName("email");
-        String email = nodeList.item(0).getChildNodes().item(0).getNodeValue();
+        if(nodeList.item(0).getChildNodes().getLength() > 0) {
+            email = nodeList.item(0).getChildNodes().item(0).getNodeValue();
+        }
+
 
         nodeList = item.getElementsByTagName("teacher");
-        String teacher = nodeList.item(0).getChildNodes().item(0).getNodeValue();
+        if(nodeList.item(0).getChildNodes().getLength() > 0) {
+            teacher = nodeList.item(0).getChildNodes().item(0).getNodeValue();
+        }
 
         return new Student(id,name,group,email,teacher);
     }

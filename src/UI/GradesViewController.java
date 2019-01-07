@@ -51,6 +51,10 @@ public class GradesViewController extends TemplateController<Grade>{
         populateList();
     }
 
+    public void onOpen(){
+        this.setChoices();
+    }
+
     private void setChoices() {
         Set<Integer> hids = new HashSet<>();
         homeworkCB.getItems().clear();
@@ -114,6 +118,7 @@ public class GradesViewController extends TemplateController<Grade>{
 
     @Override
     public void notify(Event event) {
+        this.setChoices();
         if(event.getEventType().equals("security")) {
             SecurityEvent se = (SecurityEvent) event;
 
@@ -134,8 +139,17 @@ public class GradesViewController extends TemplateController<Grade>{
 
         //homework id
         ArrayList<Grade> filtered1 = new ArrayList<>();
-        for (Grade g: list) {
-            if(homeworkCB.getValue().equals("None") || homeworkCB.getValue().equals(""+g.getHomeworkId())){
+        String selectedHw = homeworkCB.getValue();
+
+        if(selectedHw != null) {
+            for (Grade g : list) {
+                if (selectedHw.equals("None") || selectedHw.equals("" + g.getHomeworkId())) {
+                    filtered1.add(g);
+                }
+            }
+        }
+        else{
+            for (Grade g : list) {
                 filtered1.add(g);
             }
         }
@@ -152,8 +166,17 @@ public class GradesViewController extends TemplateController<Grade>{
 
         //group
         ArrayList<Grade> filtered3 = new ArrayList<>();
-        for (Grade g: filtered2) {
-            if(groupCB.getValue().equals("None") || groupCB.getValue().equals(""+g.getStudGroup())){
+
+        String selectedGroup = groupCB.getValue();
+        if(selectedGroup != null) {
+            for (Grade g : filtered2) {
+                if (selectedGroup.equals("None") || selectedGroup.equals("" + g.getStudGroup())) {
+                    filtered3.add(g);
+                }
+            }
+        }
+        else{
+            for (Grade g : filtered2) {
                 filtered3.add(g);
             }
         }
