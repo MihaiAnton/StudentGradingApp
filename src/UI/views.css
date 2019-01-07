@@ -5,3 +5,11 @@
 .anchorSubMenu{
     -fx-background-image:url('Backgrounds/mainWallpaper2.jpg');
 }
+
+.root{
+    -fx-background-color: #262626;
+}
+
+.table-view{
+    -fx-background-color: transparent;
+}

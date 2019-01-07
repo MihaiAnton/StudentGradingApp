@@ -15,7 +15,7 @@
         <URL value="@views.css" />
     </stylesheets>
     <children>
-        <TableView fx:id="table" layoutX="14.0" layoutY="64.0" prefHeight="395.0" prefWidth="489.0" style="-fx-background-color: #d9d9d9;">
+        <TableView fx:id="table" layoutX="14.0" layoutY="64.0" prefHeight="395.0" prefWidth="489.0" style="-fx-background-color: #d9d9d9;" stylesheets="@tables.css">
             <columns>
                 <TableColumn prefWidth="85.0" text="Student ID">
                     <cellValueFactory><PropertyValueFactory property="studId" />

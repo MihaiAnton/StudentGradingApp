@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.*?>
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import java.net.*?>
@@ -49,5 +50,6 @@
             <Image url="@Icons/back.png" />
          </image>
       </ImageView>
+      <PieChart fx:id="passedPC" layoutX="498.0" layoutY="250.0" prefHeight="180.0" prefWidth="194.0" />
    </children>
 </AnchorPane>

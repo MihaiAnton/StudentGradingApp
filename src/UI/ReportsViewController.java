@@ -4,6 +4,7 @@ import Service.ReportService;
 import Service.SecurityService;
 import Utils.Events.Event;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -14,6 +15,9 @@ public class ReportsViewController extends TemplateController<String>{
 
     @FXML
     Text loginStatus;
+
+    @FXML
+    PieChart passedPC;
 
     @FXML
     TextField name;
@@ -47,6 +51,10 @@ public class ReportsViewController extends TemplateController<String>{
         this.locationTF.setText("C:\\Users\\mihai\\Desktop\\");
         this.name.setText("report");
         this.pdfRB.setSelected(true);
+    }
+
+    public void updatePieChart(){
+
     }
 
 
