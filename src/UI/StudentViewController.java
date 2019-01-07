@@ -130,7 +130,7 @@ public class StudentViewController extends TemplateController<Student>{
             String steacher = teacher.getText();
 
             Student s = new Student(sid, sname, sgroup, smail, steacher);
-            validator.validate(s);
+            //validator.validate(s);
             return s;
         }
         catch (ValidationException e){
