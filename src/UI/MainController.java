@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -43,6 +44,9 @@ public class MainController {
 
     @FXML
     private PasswordField password;
+
+    @FXML
+    private Button logBtn;
 
     String loginStatusText;
 
@@ -182,6 +186,7 @@ public class MainController {
             //login for demo
             securityService.logIn("admin@cs.ubbcluj.ro","admin1234");
             this.securityService.notifyObserver(new SecurityEvent(null,"security"));
+            this.logBtn.setText("Logout");
 
 
         }
@@ -245,24 +250,43 @@ public class MainController {
 
     ////////////////security controls
     @FXML
-    public void handleLogin(){
-        try{
-            securityService.logIn(username.getText(),password.getText());
-            loginStatusText = "Logged in as " + username.getText() + ".";
-            String name = username.getText();
-            initSecurityFeatures();
-            handleConfirmation("Logged in as " + name + ".","Login confirmation");
-            this.securityService.notifyObserver(new SecurityEvent(null,"security"));
+    public void handleLoginLogout(){
+
+        if(!this.securityService.isLoggedIn()) {
+
+            try {
+                securityService.logIn(username.getText(), password.getText());
+                this.logBtn.setText("Logout");
+                loginStatusText = "Logged in as " + username.getText() + ".";
+                String name = username.getText();
+                initSecurityFeatures();
+                handleConfirmation("Logged in as " + name + ".", "Login confirmation");
+                this.securityService.notifyObserver(new SecurityEvent(null, "security"));
+            } catch (SecurityException e) {
+                handleError(e.getMessage());
+            } catch (Exception e) {
+                handleError("Login error.");
+            }
         }
-        catch (SecurityException e){
-            handleError(e.getMessage());
-        }
-        catch (Exception e){
-            handleError("Login error.");
+        else{
+            try{
+                securityService.logOut();
+                this.logBtn.setText("Login");
+                loginStatusText = "Not logged in.";
+                initSecurityFeatures();
+                handleConfirmation("Successfully logged out.","Logout confirmation.");
+                this.securityService.notifyObserver(new SecurityEvent(null,"security"));
+            }
+            catch (SecurityException e){
+                handleError(e.getMessage());
+            }
+            catch (Exception e){
+                handleError("Logout error.");
+            }
         }
     }
 
-    @FXML
+   /* @FXML
     public void handleLogout(){
         try{
             securityService.logOut();
@@ -277,7 +301,7 @@ public class MainController {
         catch (Exception e){
             handleError("Logout error.");
         }
-    }
+    }*/
 
     @FXML
     public void handleCreateAccount(){

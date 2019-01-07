@@ -60,13 +60,12 @@
       <TextField fx:id="username" layoutX="616.0" layoutY="23.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8eafe5;" />
         <PasswordField fx:id="password" layoutX="616.0" layoutY="60.0" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8eafe5;" />
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
-      <HBox layoutX="531.0" layoutY="105.0" prefHeight="31.0" prefWidth="252.0">
+      <HBox layoutX="551.0" layoutY="105.0" prefHeight="31.0" prefWidth="215.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleCreateAccount" opacity="0.64" prefHeight="57.0" prefWidth="107.0" text="New account" />
+            <Button fx:id="logBtn" mnemonicParsing="false" onAction="#handleLoginLogout" opacity="0.64" prefHeight="31.0" prefWidth="91.0" text="Login" />
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="8.0" />
-            <Button mnemonicParsing="false" onAction="#handleLogin" opacity="0.64" prefHeight="31.0" prefWidth="59.0" text="Login" />
+            <Button mnemonicParsing="false" onAction="#handleCreateAccount" opacity="0.64" prefHeight="31.0" prefWidth="107.0" text="New account" />
             <Separator opacity="0.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="7.0" />
-            <Button mnemonicParsing="false" onAction="#handleLogout" opacity="0.64" prefHeight="31.0" prefWidth="69.0" text="Logout" />
          </children>
       </HBox>
       <Text fx:id="clockText" fill="#89a1c3" layoutX="27.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">

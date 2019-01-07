@@ -180,6 +180,10 @@ public class SecurityService implements Observable<Event> {
         return null;
     }
 
+    public boolean isLoggedIn(){
+        return this.loggedIn;
+    }
+
 
 
 
