@@ -38,7 +38,7 @@ public class SecurityService implements Observable<Event> {
 
 
         if (userName.matches("[a-zA-Z][a-zA-Z0-9]*@scs.ubbcluj.ro")) {        //student login
-            if (loggedIn) {
+            if (loggedIn && !accesRight.equals(AccesRight.ADMIN)) {
                 throw new SecurityException("Log out to create a student account.");
             } else {
                 int id = userRepository.getNextId();
@@ -74,6 +74,35 @@ public class SecurityService implements Observable<Event> {
             throw new SecurityException("Invalid username.");
         }
         return "";
+    }
+
+    public void updateUser(String userName,String passWord,AccesRight accesRight){
+
+        if(this.userRepository.findOne(userName) == null){
+            throw new SecurityException("User not found.");
+        }
+
+        else{
+            User user = (User)userRepository.findOne(userName);
+            if(!accesRight.equals(user.getRight())){
+                user.setRight(accesRight);
+                userRepository.update(user);
+            }
+
+            if(!passWord.equals("") && !loginInfo.findOne(userName).equals(encryptPassword(passWord))){
+                Password pass = new Password();
+                pass.setId(userName);
+                pass.setPassword(encryptPassword(passWord));
+                loginInfo.update(pass);
+            }
+        }
+    }
+
+    public void deleteUser(String userName){
+
+        this.userRepository.delete(userName);
+        this.loginInfo.delete(userName);
+
     }
 
     private void passwordCheck(String password){
@@ -232,5 +261,14 @@ public class SecurityService implements Observable<Event> {
         else{
             return "Not logged in.";
         }
+    }
+
+    public User findUser(String text) {
+        return (User)this.userRepository.findOne(text);
+    }
+
+
+    public Iterable<User> findAllUsers(){
+        return this.userRepository.findAll();
     }
 }
