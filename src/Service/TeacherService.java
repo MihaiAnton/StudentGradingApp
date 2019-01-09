@@ -18,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TeacherService implements Observable<Event> {
@@ -442,6 +444,43 @@ o ”Feedback:” aprecieri, sugestii, precizări în legătură cu depunctăril
 
     public Grade findGrade(String s, int hid) {
         return gradeRepo.findOne(s+hid);
+    }
+
+
+    //chart reports
+    public Map<String, Integer> getPassedStatus() {
+
+        int passed = 0;
+        int notPassed = 0;
+        Map<String,Integer> passedStatus = new HashMap<>();
+        for (Student student:this.studentRepo.findAll()) {
+
+            double sum = 0;
+            int count = 0;
+
+            for (Grade g:gradeRepo.findAll()) {
+                if(g.getStudId().equals(student.getId())){
+                    Homework h = homeworkRepo.findOne(g.getHomeworkId());
+                    int proportion = h.getDeadlineWeek() - h.getTargetWeek() + 1;
+                    count += proportion;
+                    sum += (g.getGrade() * proportion);
+
+                }
+            }
+
+            if(sum / count > 5){
+                passed++;
+            }
+            else{
+                notPassed++;
+            }
+        }
+
+        passedStatus.put("Passed", passed);
+        passedStatus.put("Not passed",notPassed);
+
+
+        return passedStatus;
     }
 }
 

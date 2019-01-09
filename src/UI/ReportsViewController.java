@@ -3,12 +3,21 @@ package UI;
 import Service.ReportService;
 import Service.SecurityService;
 import Utils.Events.Event;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.util.Map;
 
 public class ReportsViewController extends TemplateController<String>{
 
@@ -17,7 +26,10 @@ public class ReportsViewController extends TemplateController<String>{
     Text loginStatus;
 
     @FXML
-    PieChart passedPC;
+    PieChart reportPC;
+
+    @FXML
+    Button infoBtn;
 
     @FXML
     TextField name;
@@ -31,7 +43,13 @@ public class ReportsViewController extends TemplateController<String>{
     @FXML
     RadioButton txtRB, pdfRB;
 
+    @FXML
+    ChoiceBox<String> chartChoices;
 
+
+
+
+    private boolean showMoreActivated = false;
     private ReportService reportsService;
 
     @Override
@@ -51,10 +69,90 @@ public class ReportsViewController extends TemplateController<String>{
         this.locationTF.setText("C:\\Users\\mihai\\Desktop\\");
         this.name.setText("report");
         this.pdfRB.setSelected(true);
+        initPieChart();
+        initChartChoices();
     }
 
-    public void updatePieChart(){
+    private void initChartChoices() {
+        this.chartChoices.getItems().add("Students passed");
+        this.chartChoices.getItems().add("Grades distribution");
+        this.chartChoices.getItems().add("Assignments per homework");
 
+        this.chartChoices.setValue("Students passed");
+
+        this.chartChoices.setOpacity(0);
+
+    }
+
+    public void initPieChart(){
+        reportPC.setOpacity(0);
+    }
+
+    @FXML
+    public void handleChangeChart(){
+
+        if(showMoreActivated){
+            ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
+            String s = chartChoices.getValue();
+
+            if(s.equals("Students passed")){
+                Map<String, Integer> passed = service.getPassedStatus();
+                for (String key:passed.keySet()) {
+                    list.add(new PieChart.Data(key, passed.get(key)));
+                }
+                updatePieChart("Students passed", list);
+            }
+            else if(s.equals("Grades distribution")){
+
+            }
+            else if(s.equals("Assignments per homework")){
+
+            }
+
+        }
+
+    }
+
+
+    public void updatePieChart(String title, ObservableList<PieChart.Data> list){
+
+        reportPC.setOpacity(1);
+        reportPC.getData().clear();
+
+        reportPC.getData().addAll(list);
+
+        reportPC.setLabelsVisible(false);
+
+        reportPC.setLegendSide(Side.BOTTOM);
+        reportPC.setLabelLineLength(5);
+        reportPC.setLegendVisible(true);
+
+        reportPC.setTitle(title);
+    }
+    
+    @FXML
+    public void handleShowMore(){
+        if(!showMoreActivated){
+            this.infoBtn.setText("Show less");
+            showAdditionalInfo();
+            showMoreActivated = true;
+            handleChangeChart();
+        }
+        else{
+           this.infoBtn.setText("Show more");
+           hideAdditionalInfo();
+           showMoreActivated = false;
+        }
+    }
+
+    private void hideAdditionalInfo() {
+        this.reportPC.setOpacity(0);
+        chartChoices.setOpacity(0);
+    }
+
+    private void showAdditionalInfo() {
+        this.reportPC.setOpacity(1);
+        chartChoices.setOpacity(1);
     }
 
 

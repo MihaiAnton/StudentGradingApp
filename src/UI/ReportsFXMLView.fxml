@@ -13,7 +13,7 @@
         <URL value="@views.css" />
     </stylesheets>
     <children>
-      <Text fill="#618be4" layoutX="566.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
+      <Text fill="#618be4" layoutX="561.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports">
          <font>
             <Font size="22.0" />
          </font>
@@ -27,7 +27,7 @@
         <TextField fx:id="name" layoutX="563.0" layoutY="94.0" opacity="0.9" prefHeight="31.0" prefWidth="180.0" />
         <Label layoutX="483.0" layoutY="150.0" text="Location:" textFill="#b9c6d3" />
         <TextField fx:id="locationTF" layoutX="563.0" layoutY="145.0" opacity="0.9" prefHeight="31.0" prefWidth="180.0" />
-        <TableView fx:id="table" layoutX="14.0" layoutY="270.0" opacity="0.0" prefHeight="224.0" prefWidth="309.0">
+        <TableView fx:id="table" layoutX="14.0" layoutY="477.0" opacity="0.0" prefHeight="17.0" prefWidth="4.0">
         <columns>
           <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
         </columns>
@@ -35,12 +35,12 @@
       <RadioButton fx:id="groupAvg" layoutX="75.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="Average grade for each group" textFill="#b9c6d3" />
       <RadioButton fx:id="pdfRB" layoutX="511.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#pdfRadioButtonSelect" selected="true" text="PDF" textFill="#b9c6d3" />
       <RadioButton fx:id="txtRB" layoutX="598.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#txtRadioButtonSelect" text="Text" textFill="#b9c6d3" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="301.0" layoutY="222.0" onMouseClicked="#handleGenerateReport" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="287.0" layoutY="85.0" onMouseClicked="#handleGenerateReport" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/reportClick.png" />
          </image>
       </ImageView>
-      <Text fill="#4ba2e4" layoutX="324.0" layoutY="391.0" onMouseClicked="#handleGenerateReport" strokeType="OUTSIDE" strokeWidth="0.0" text="GENERATE" textAlignment="CENTER">
+      <Text fill="#4ba2e4" layoutX="310.0" layoutY="259.0" onMouseClicked="#handleGenerateReport" strokeType="OUTSIDE" strokeWidth="0.0" text="GENERATE" textAlignment="CENTER">
          <font>
             <Font size="22.0" />
          </font>
@@ -50,6 +50,17 @@
             <Image url="@Icons/back.png" />
          </image>
       </ImageView>
-      <PieChart fx:id="passedPC" layoutX="498.0" layoutY="250.0" prefHeight="180.0" prefWidth="194.0" />
+      <Label layoutX="75.0" layoutY="67.0" text="What to include:" textFill="#4ba2e4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="infoBtn" onAction="#handleShowMore" layoutX="75.0" layoutY="360.0" mnemonicParsing="false" text="Show more" />
+      <StackPane layoutX="321.0" layoutY="261.0" prefHeight="228.0" prefWidth="369.0">
+         <children>
+            <PieChart id="piechart" fx:id="reportPC" labelLineLength="50.0" prefHeight="202.0" prefWidth="369.0" />
+         </children>
+      </StackPane>
+      <ChoiceBox onAction="#handleChangeChart" fx:id="chartChoices" layoutX="75.0" layoutY="410.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

@@ -205,50 +205,56 @@ public class MainController {
     @FXML
     public void openStudentScene(){
         AccesRight[] neededRight = {ADMIN, FULL};
-
-        if(securityService.grantAcces(neededRight)){
-            studentStage.show();
+        try {
+            if (securityService.grantAcces(neededRight)) {
+                studentStage.show();
+            } else {
+                handleError("You don't have the acces rights to enter this menu.");
+            }
         }
-        else{
-            handleError("You don't have the acces rights to enter this menu.");
-        }
+        catch(Exception e){}
     }
 
     @FXML
     public void openHomeworkScene(){
         AccesRight[] neededRight = {ADMIN, FULL, RESTRICTED};
 
-        if(securityService.grantAcces(neededRight)){
-            homeworkStage.show();
+        try {
+            if (securityService.grantAcces(neededRight)) {
+                homeworkStage.show();
+            } else {
+                handleError("Log in to enter this menu.");
+            }
         }
-        else {
-            handleError("Log in to enter this menu.");
-        }
+        catch(Exception e){}
     }
 
     @FXML
     public void openGradesScene(){
         AccesRight[] neededRight = {ADMIN, FULL, RESTRICTED};
 
-        if(securityService.grantAcces(neededRight)){
-            this.gradesViewController.onOpen();
-            gradesStage.show();
+        try {
+            if (securityService.grantAcces(neededRight)) {
+                this.gradesViewController.onOpen();
+                gradesStage.show();
+            } else {
+                handleError("Log in to enter this menu.");
+            }
         }
-        else{
-            handleError("Log in to enter this menu.");
-        }
+        catch(Exception e){}
     }
 
     @FXML
     public void openReportScene(){
         AccesRight[] neededRight = {ADMIN, FULL};
-
-        if(securityService.grantAcces(neededRight)){
-            reportStage.show();
+        try {
+            if (securityService.grantAcces(neededRight)) {
+                reportStage.show();
+            } else {
+                handleError("You don't have the acces rights to enter this menu.");
+            }
         }
-        else{
-            handleError("You don't have the acces rights to enter this menu.");
-        }
+        catch(Exception e){}
     }
 
 

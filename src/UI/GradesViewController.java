@@ -72,6 +72,7 @@ public class GradesViewController extends TemplateController<Grade>{
         setChoices();
         setDefaultValues();
         populateList();
+        handleFilter();
     }
 
     public void onOpen(){
@@ -79,37 +80,44 @@ public class GradesViewController extends TemplateController<Grade>{
     }
 
     private void setChoices() {
-        Set<Integer> hids = new HashSet<>();
-        homeworkCB.getItems().clear();
+        try {
+            Set<Integer> hids = new HashSet<>();
+            homeworkCB.getItems().clear();
 
-        for(Grade grade: service.getAllGrades()){
-            hids.add(grade.getHomeworkId());
+            for (Grade grade : service.getAllGrades()) {
+                hids.add(grade.getHomeworkId());
+            }
+
+            for (Integer id : hids) {
+                homeworkCB.getItems().add("" + id);
+            }
+
+            homeworkCB.getItems().add("None");
+
+            groupCB.getItems().clear();
+
+            Set<Integer> groups = new HashSet<>();
+
+            for (Grade g : service.getAllGrades()) {
+                Student s = service.findStudent(g.getStudId());
+                if(s != null) {
+                    groups.add(s.getGroup());
+                }
+            }
+
+            for (int group : groups) {
+                groupCB.getItems().add("" + group);
+            }
+
+            groupCB.getItems().add("None");
         }
-
-        for (Integer id:hids   ) {
-            homeworkCB.getItems().add("" + id);
-        }
-
-        homeworkCB.getItems().add("None");
-
-        groupCB.getItems().clear();
-
-        Set<Integer> groups = new HashSet<>();
-
-        for(Grade g:service.getAllGrades()){
-            groups.add(service.findStudent(g.getStudId()).getGroup());
-        }
-
-        for(int group:groups){
-            groupCB.getItems().add("" + group);
-        }
-
-        groupCB.getItems().add("None");
+        catch(Exception e){}
 
     }
 
     private void setDefaultValues() {
 
+        setChoices();
         if (securityService.getStudentId() != null)
             studentId.setText(securityService.getStudentId());
 
@@ -145,7 +153,8 @@ public class GradesViewController extends TemplateController<Grade>{
 
     @Override
     public void notify(Event event) {
-        this.setChoices();
+
+        setChoices();
         if(event.getEventType().equals("security")) {
             SecurityEvent se = (SecurityEvent) event;
 
@@ -157,7 +166,15 @@ public class GradesViewController extends TemplateController<Grade>{
 
     @FXML
     public void handleClear(){
-        this.setDefaultValues();
+        if (securityService.getStudentId() != null)
+            studentId.setText(securityService.getStudentId());
+
+        else{
+            studentId.setText("");
+        }
+        groupCB.setValue("None");
+        homeworkCB.setValue("None");
+        this.handleFilter();
     }
 
     private Iterable<Grade> applyFilters(Iterable<Grade> list){
