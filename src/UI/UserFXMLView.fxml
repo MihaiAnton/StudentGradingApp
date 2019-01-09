@@ -56,7 +56,7 @@
         </VBox>
         <VBox layoutX="580.0" layoutY="83.0" prefHeight="148.0" prefWidth="158.0">
             <children>
-                <TextField fx:id="userName" opacity="0.9" promptText="User name" />
+                <TextField onKeyTyped="#handleUsernameChanged" fx:id="userName" opacity="0.9" promptText="User name" />
             <Separator opacity="0.0" prefWidth="200.0" />
             <Separator opacity="0.0" prefHeight="14.0" prefWidth="119.0" />
             <ChoiceBox fx:id="userRight" opacity="0.9" prefHeight="25.0" prefWidth="160.0" />

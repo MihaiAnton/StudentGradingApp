@@ -70,23 +70,10 @@
             <children>
                 <TextField fx:id="studentId" onKeyTyped="#filterOnWriteSearch" opacity="0.9" />
             <Separator opacity="0.0" prefHeight="25.0" prefWidth="100.0" />
-                <ChoiceBox fx:id="homeworkCB" prefWidth="150.0" style="-fx-background-color: #99ffcc;" />
+                <ChoiceBox fx:id="homeworkCB" onAction="#handleFilter" prefWidth="150.0" style="-fx-background-color: #99ffcc;" />
             <Separator opacity="0.0" prefHeight="28.0" prefWidth="100.0" />
-                <ChoiceBox fx:id="groupCB" prefWidth="150.0" style="-fx-background-color: #99ffcc;" />
+                <ChoiceBox fx:id="groupCB" onAction="#handleFilter" prefWidth="150.0" style="-fx-background-color: #99ffcc;" />
             </children></VBox>
-        <HBox layoutX="557.0" layoutY="275.0" prefHeight="44.0" prefWidth="198.0">
-            <children>
-                <Button mnemonicParsing="false" onAction="#handleFilter" opacity="0.64" prefHeight="48.0" prefWidth="85.0" text="Filter" textFill="#1c5c7c">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="31.13671875" />
-                <Button mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="47.0" prefWidth="83.0" text="Clear" textFill="#1c5c7c">
-               <font>
-                  <Font size="14.0" />
-               </font></Button>
-            </children>
-        </HBox>
         <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Icons/back.png" />
@@ -137,7 +124,7 @@
             <Separator opacity="0.0" prefHeight="12.0" prefWidth="100.0" />
             <TextField fx:id="hid" opacity="0.9" promptText="Homework Id" />
             <Separator opacity="0.0" prefHeight="12.0" prefWidth="100.0" />
-            <TextField fx:id="week" opacity="0.9" promptText="Week" />
+            <TextField fx:id="week" opacity="0.9" promptText="Week" text="13" />
             <Separator opacity="0.0" prefHeight="12.0" prefWidth="100.0" />
             <TextField fx:id="fback" opacity="0.9" promptText="Feedback" text="Good job!" />
             <Separator opacity="0.0" prefHeight="12.0" prefWidth="100.0" />
@@ -155,7 +142,12 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button onAction="#handleGradingContextOpen" fx:id="assignGradeButton" layoutX="259.0" layoutY="319.0" mnemonicParsing="false" opacity="0.8" prefHeight="30.0" prefWidth="118.0" text="Assign grades" textFill="#1c5c7c">
+      <Button fx:id="assignGradeButton" layoutX="259.0" layoutY="319.0" mnemonicParsing="false" onAction="#handleGradingContextOpen" opacity="0.8" prefHeight="30.0" prefWidth="118.0" text="Assign grades" textFill="#1c5c7c">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+          <Button layoutX="670.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="47.0" prefWidth="83.0" text="Clear" textFill="#1c5c7c">
          <font>
             <Font size="14.0" />
          </font>

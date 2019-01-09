@@ -109,6 +109,27 @@ public class UserViewController extends TemplateController<User> {
         this.userName.clear();
         this.userPassword.clear();
         this.userRight.setValue(AccesRight.RESTRICTED);
+        populateList();
+    }
+
+    @FXML
+    public void handleUsernameChanged(){
+        String s = userName.getText();
+
+        filterUsers(s);
+
+    }
+
+    private void filterUsers(String s) {
+
+        controllerModel.clear();
+
+
+        for (User user:securityService.findAllUsers()) {
+            if(user.getUserName().matches(s + ".*"))
+                controllerModel.add(user);
+        }
+
     }
 }
 

@@ -238,4 +238,9 @@ public class ReportsViewController extends TemplateController<String>{
     }
 
 
+    public void onOpen() {
+        if(showMoreActivated){
+            handleShowMore();
+        }
+    }
 }

@@ -35,6 +35,7 @@ public class MainController {
     private ReportService reportService;
     private Stage studentStage, homeworkStage, gradesStage, reportStage, googleLoginStage, userAdminStage;
     private GradesViewController gradesViewController;
+    private ReportsViewController reportsViewController;
 
     private Stage thisStage;
 
@@ -175,7 +176,7 @@ public class MainController {
                 this.reportStage = new Stage();
                 FXMLLoader reportLoader = new FXMLLoader(getClass().getResource("ReportsFXMLView.fxml"));
                 Pane reportPane = reportLoader.load();
-                ReportsViewController reportsViewController = reportLoader.getController();
+                this.reportsViewController = reportLoader.getController();
                 reportsViewController.setSecurityService(this.securityService);
                 reportsViewController.setService(teacherService);
                 reportsViewController.setReportsService(this.reportService);
@@ -280,6 +281,7 @@ public class MainController {
         AccesRight[] neededRight = {ADMIN, FULL};
         try {
             if (securityService.grantAcces(neededRight)) {
+                reportsViewController.onOpen();
                 reportStage.show();
             } else {
                 handleError("You don't have the acces rights to enter this menu.");

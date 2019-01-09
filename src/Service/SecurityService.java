@@ -21,12 +21,27 @@ public class SecurityService implements Observable<Event> {
     private boolean loggedIn;
     private AccesRight accesRight;
 
+    private int adminCount = 0;
+
     public SecurityService(UserRepository userRepository, LoginInfo loginInfo) {
         this.userRepository = userRepository;
         this.loginInfo = loginInfo;
         loggedIn = false;
         loggedUser = null;
         accesRight = AccesRight.GENERIC;
+
+        adminCount = countAdmins();
+    }
+
+    private int countAdmins() {
+        int nr = 0;
+        for (Object user:
+             userRepository.findAll()) {
+            user = (User)user;
+            if(((User) user).getRight().equals(AccesRight.ADMIN))
+                nr++;
+        }
+        return nr;
     }
 
     /***
@@ -78,6 +93,7 @@ public class SecurityService implements Observable<Event> {
 
     public void updateUser(String userName,String passWord,AccesRight accesRight){
 
+       // System.out.println("In update user: " + adminCount);
         if(this.userRepository.findOne(userName) == null){
             throw new SecurityException("User not found.");
         }
@@ -85,6 +101,15 @@ public class SecurityService implements Observable<Event> {
         else{
             User user = (User)userRepository.findOne(userName);
             if(!accesRight.equals(user.getRight())){
+                if(accesRight.equals(AccesRight.ADMIN))
+                    adminCount++;
+                if(user.getRight().equals(AccesRight.ADMIN) && adminCount == 1 && !accesRight.equals(AccesRight.ADMIN)){
+                    throw  new SecurityException("Can't deprecate the only ADMIN.");
+                }
+                if(user.getRight().equals(AccesRight.ADMIN) && !accesRight.equals(AccesRight.ADMIN)){
+                    adminCount--;
+                }
+
                 user.setRight(accesRight);
                 userRepository.update(user);
             }

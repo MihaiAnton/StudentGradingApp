@@ -89,6 +89,9 @@ public class GradesViewController extends TemplateController<Grade>{
 
     public void onOpen(){
         this.setChoices();
+        if(this.gradingContextOpened){
+            initFullAccesGradingContext();
+        }
     }
 
     private void setChoices() {
@@ -411,7 +414,7 @@ public class GradesViewController extends TemplateController<Grade>{
 
                                 service.assignGrade(student.getId(), hid, gr, week, feedback,mailFlag);
                                 gradeConfirmation("Student " + student.getName() + " graded " + gr + " at homework " + hid + ".");
-
+                                setChoices();
                             }
                         } catch (Exception e) {
                             gradeConfirmation(e.getMessage());
