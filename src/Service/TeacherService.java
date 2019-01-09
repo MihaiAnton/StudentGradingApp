@@ -94,6 +94,14 @@ public class TeacherService implements Observable<Event> {
         return false;
     }
 
+    public boolean hasGradeAssigned(int homeworkId){
+        for (Grade g:this.gradeRepo.findAll()) {
+            if(g.getHomeworkId() == homeworkId)
+                return true;
+        }
+        return false;
+    }
+
     /**
      *
      * @param id

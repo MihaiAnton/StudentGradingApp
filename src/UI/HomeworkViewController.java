@@ -70,9 +70,17 @@ public class HomeworkViewController extends TemplateController<Homework> {
     public void handleDelete(){
         try{
             Homework h = getEntityFromFields();
-            if(this.service.deleteHomework(h) != null) {
-                this.service.notifyObserver(new ServiceEvent("homework",
-                        new HomeworkEvent("delete", h)));
+            if(this.service.findHomework(h.getId()) != null) {
+                if(this.service.hasGradeAssigned(h.getId())){
+                    handleError("Can't delete " + h.getDescription() + ".\nGrades assigned to the homework.");
+
+                }
+                else {
+                    if (this.service.deleteHomework(h) != null) {
+                        this.service.notifyObserver(new ServiceEvent("homework",
+                                new HomeworkEvent("delete", h)));
+                    }
+                }
             }
 
         }
