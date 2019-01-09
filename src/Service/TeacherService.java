@@ -17,9 +17,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TeacherService implements Observable<Event> {
@@ -481,6 +479,62 @@ o ”Feedback:” aprecieri, sugestii, precizări în legătură cu depunctăril
 
 
         return passedStatus;
+    }
+
+    public Map<String, Integer> getGradesDistribution() {
+
+        Map<Integer, Integer> frequency = new HashMap<>();
+
+        for(int i=2;i<=10;i++){
+            frequency.put(i,0);
+        }
+
+        for (Grade g:gradeRepo.findAll()) {
+            int value = (int)g.getGrade();
+            if(value == 10){
+                frequency.put(10, frequency.get(10) + 1);
+            }
+            else{
+                frequency.put(value + 1, frequency.get(value + 1) + 1);
+            }
+        }
+
+        Map<String, Integer> result = new HashMap<>();
+        for(int i=2;i<=10;i++){
+
+            if(frequency.get(i) > 0){
+                result.put((i-1) + "-"+i,frequency.get(i));
+            }
+        }
+        return result;
+    }
+
+    public Map<String, Integer> getHomeworkAsignmentDistribution() {
+
+        Set<Integer> homeworkids = new HashSet<>();
+
+        for (Grade g:gradeRepo.findAll()) {
+            homeworkids.add(g.getHomeworkId());
+        }
+
+        Map<Integer, Integer> hwFrequency = new HashMap<>();
+
+        for (Integer id:homeworkids) {
+            hwFrequency.put(id,0);
+        }
+
+        for (Grade g:gradeRepo.findAll()) {
+            hwFrequency.put(g.getHomeworkId(), hwFrequency.get(g.getHomeworkId()) + 1);
+        }
+
+        Map<String , Integer> res = new HashMap<>();
+
+        for (Integer id:hwFrequency.keySet()) {
+            res.put(findHomework(id).getDescription(), hwFrequency.get(id));
+        }
+
+        return res;
+
     }
 }
 

@@ -76,9 +76,15 @@
             </children></VBox>
         <HBox layoutX="557.0" layoutY="275.0" prefHeight="44.0" prefWidth="198.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#handleFilter" opacity="0.64" prefHeight="48.0" prefWidth="85.0" text="Filter" />
+                <Button mnemonicParsing="false" onAction="#handleFilter" opacity="0.64" prefHeight="48.0" prefWidth="85.0" text="Filter" textFill="#1c5c7c">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="31.13671875" />
-                <Button mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="47.0" prefWidth="83.0" text="Clear" />
+                <Button mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="47.0" prefWidth="83.0" text="Clear" textFill="#1c5c7c">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
             </children>
         </HBox>
         <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
@@ -87,11 +93,6 @@
             </image>
         </ImageView>
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
-      <Text fx:id="assignGradeLabel" fill="#4496e8" layoutX="259.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign a grade" wrappingWidth="154.0">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
       <ImageView fx:id="googleLoginIcon" fitHeight="61.0" fitWidth="48.0" layoutX="365.0" layoutY="422.0" onMouseClicked="#handleLogin" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/G.png" />
@@ -143,14 +144,22 @@
             <TextField fx:id="grade" opacity="0.9" promptText="Grade" />
          </children>
       </VBox>
-      <VBox layoutX="259.0" layoutY="349.0" prefHeight="53.0" prefWidth="143.0">
+      <VBox layoutX="259.0" layoutY="357.0" prefHeight="53.0" prefWidth="143.0">
          <children>
             <RadioButton fx:id="mailCheck" mnemonicParsing="false" selected="true" text="Send mail" textFill="#98cae4" />
             <Separator opacity="0.0" prefHeight="8.0" prefWidth="130.0" />
             <RadioButton fx:id="missingReason" mnemonicParsing="false" text="Missing reason" textFill="#98cae4" />
          </children>
       </VBox>
-      <Button fx:id="gradeBtn" layoutX="259.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#handleGrade" opacity="0.8" prefHeight="44.0" prefWidth="82.0" text="Grade" />
+      <Button fx:id="gradeBtn" layoutX="259.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#handleGrade" opacity="0.8" prefHeight="44.0" prefWidth="82.0" text="Grade" textFill="#1c5c7c">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button onAction="#handleGradingContextOpen" fx:id="assignGradeButton" layoutX="259.0" layoutY="319.0" mnemonicParsing="false" opacity="0.8" prefHeight="30.0" prefWidth="118.0" text="Assign grades" textFill="#1c5c7c">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
 
     </children>
 </AnchorPane>

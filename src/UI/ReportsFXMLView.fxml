@@ -55,12 +55,12 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="infoBtn" onAction="#handleShowMore" layoutX="75.0" layoutY="360.0" mnemonicParsing="false" text="Show more" />
-      <StackPane layoutX="321.0" layoutY="261.0" prefHeight="228.0" prefWidth="369.0">
+      <Button fx:id="infoBtn" layoutX="75.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleShowMore" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #4ba2e4;" text="Show more" textFill="WHITE" />
+      <StackPane layoutX="327.0" layoutY="261.0" prefHeight="229.0" prefWidth="394.0">
          <children>
-            <PieChart id="piechart" fx:id="reportPC" labelLineLength="50.0" prefHeight="202.0" prefWidth="369.0" />
+            <PieChart id="piechart" fx:id="reportPC" labelLineLength="50.0" legendSide="LEFT" prefHeight="242.0" prefWidth="394.0" titleSide="BOTTOM" />
          </children>
       </StackPane>
-      <ChoiceBox onAction="#handleChangeChart" fx:id="chartChoices" layoutX="75.0" layoutY="410.0" prefWidth="150.0" />
-   </children>
+      <ChoiceBox fx:id="chartChoices" layoutX="75.0" layoutY="383.0" onAction="#handleChangeChart" onMouseClicked="#handleChangeChart" opacity="0.8" prefWidth="150.0" />
+      </children>
 </AnchorPane>

@@ -45,6 +45,7 @@ public class ReportsViewController extends TemplateController<String>{
 
     @FXML
     ChoiceBox<String> chartChoices;
+    String previousChoice = "";
 
 
 
@@ -81,6 +82,7 @@ public class ReportsViewController extends TemplateController<String>{
         this.chartChoices.setValue("Students passed");
 
         this.chartChoices.setOpacity(0);
+        hideAdditionalInfo();
 
     }
 
@@ -95,6 +97,13 @@ public class ReportsViewController extends TemplateController<String>{
             ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
             String s = chartChoices.getValue();
 
+            if(s.equals(previousChoice)){
+                return;
+            }
+            else{
+                previousChoice = s;
+            }
+
             if(s.equals("Students passed")){
                 Map<String, Integer> passed = service.getPassedStatus();
                 for (String key:passed.keySet()) {
@@ -103,12 +112,19 @@ public class ReportsViewController extends TemplateController<String>{
                 updatePieChart("Students passed", list);
             }
             else if(s.equals("Grades distribution")){
-
+                Map<String ,Integer> grades = service.getGradesDistribution();
+                for(String key:grades.keySet()){
+                    list.add(new PieChart.Data(key, grades.get(key)));
+                }
+                updatePieChart("Grade distribution", list);
             }
             else if(s.equals("Assignments per homework")){
-
+                Map<String ,Integer> hwAssignment = service.getHomeworkAsignmentDistribution();
+                for(String key:hwAssignment.keySet()){
+                    list.add(new PieChart.Data(key, hwAssignment.get(key)));
+                }
+                updatePieChart("Homework Assignment", list);
             }
-
         }
 
     }
@@ -119,15 +135,17 @@ public class ReportsViewController extends TemplateController<String>{
         reportPC.setOpacity(1);
         reportPC.getData().clear();
 
+        double angle = Math.random()*360;
+        reportPC.setStartAngle(angle);
+
         reportPC.getData().addAll(list);
 
         reportPC.setLabelsVisible(false);
 
-        reportPC.setLegendSide(Side.BOTTOM);
+        reportPC.setLegendSide(Side.LEFT);
         reportPC.setLabelLineLength(5);
         reportPC.setLegendVisible(true);
 
-        reportPC.setTitle(title);
     }
     
     @FXML
@@ -148,11 +166,13 @@ public class ReportsViewController extends TemplateController<String>{
     private void hideAdditionalInfo() {
         this.reportPC.setOpacity(0);
         chartChoices.setOpacity(0);
+
     }
 
     private void showAdditionalInfo() {
         this.reportPC.setOpacity(1);
         chartChoices.setOpacity(1);
+
     }
 
 

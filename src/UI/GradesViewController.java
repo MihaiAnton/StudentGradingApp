@@ -54,10 +54,11 @@ public class GradesViewController extends TemplateController<Grade>{
     ImageView googleLoginIcon;
 
     @FXML
-    Text assignGradeLabel;
+    Button assignGradeButton;
 
     private SecurityService securityService;
     private LoginController mailLogin;
+    private boolean gradingContextOpened = false;
 
     public void setSecurityService(SecurityService securityService){
 
@@ -162,6 +163,14 @@ public class GradesViewController extends TemplateController<Grade>{
         this.controllerModel.clear();
     }
 
+    private void initFullAccesGradingContext(){
+        hideGradeFeatures(true);
+        assignGradeButton.setDisable(false);
+        assignGradeButton.setOpacity(1);
+        gradingContextOpened = false;
+
+    }
+
     private void hideGradeFeatures(boolean hide){
         if(hide){
             gradeBtn.setDisable(true);
@@ -177,7 +186,8 @@ public class GradesViewController extends TemplateController<Grade>{
             vboxLabels.setOpacity(0);
             googleLoginIcon.setDisable(true);
             googleLoginIcon.setOpacity(0);
-            assignGradeLabel.setOpacity(0);
+            assignGradeButton.setDisable(true);
+            assignGradeButton.setOpacity(0);
             students.setDisable(true);
 
         }
@@ -195,11 +205,29 @@ public class GradesViewController extends TemplateController<Grade>{
             vboxLabels.setOpacity(1);
             googleLoginIcon.setDisable(false);
             googleLoginIcon.setOpacity(1);
-            assignGradeLabel.setOpacity(1);
+            assignGradeButton.setDisable(false);
+            assignGradeButton.setOpacity(1);
             students.setDisable(false);
         }
 
     }
+
+    @FXML
+    public void handleGradingContextOpen(){
+
+        if(gradingContextOpened){
+            assignGradeButton.setText("Assign grades");
+            gradingContextOpened = false;
+            initFullAccesGradingContext();
+        }
+        else{
+            assignGradeButton.setText("Close grading");
+            gradingContextOpened = true;
+            hideGradeFeatures(false);
+        }
+
+    }
+
 
     @Override
     public void notify(Event event) {
@@ -212,7 +240,7 @@ public class GradesViewController extends TemplateController<Grade>{
                 hideGradeFeatures(true);
             }
             else{
-                hideGradeFeatures(false);
+                initFullAccesGradingContext();
             }
 
             loginStatus.setText(securityService.getLogStatus());
