@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import java.net.URL?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="anchorSubMenu" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.UserViewController">
+    <stylesheets>
+        <URL value="@views.css" />
+    </stylesheets>
+    <children>
+        <TableView fx:id="table" layoutX="22.0" layoutY="71.0" prefHeight="362.0" prefWidth="353.0" style="-fx-background-color: #d9d9d9;" stylesheets="@tables.css">
+            <columns>
+                <TableColumn prefWidth="201.0" text="User name">
+                    <cellValueFactory><PropertyValueFactory property="userName" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="151.0" text="Right">
+                    <cellValueFactory><PropertyValueFactory property="right" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+        <Text fill="#3b69a4" layoutX="219.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Menu - Admin Use Only" textAlignment="CENTER" wrappingWidth="361.13671875">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
+        <VBox layoutX="408.0" layoutY="71.0" prefHeight="148.0" prefWidth="119.0">
+            <children>
+                <Label prefHeight="40.0" prefWidth="125.0" text="User name:" textFill="#98cae4">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Separator opacity="0.0" prefWidth="200.0" />
+                <Label prefHeight="42.0" prefWidth="122.0" text="Acces Right:" textFill="#98cae4">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <Separator opacity="0.0" prefHeight="4.0" prefWidth="85.0" />
+            <Label prefHeight="30.0" prefWidth="120.0" text="Password:" textFill="#98cae4">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            </children>
+        </VBox>
+        <VBox layoutX="580.0" layoutY="83.0" prefHeight="148.0" prefWidth="158.0">
+            <children>
+                <TextField fx:id="userName" opacity="0.9" promptText="User name" />
+            <Separator opacity="0.0" prefWidth="200.0" />
+            <Separator opacity="0.0" prefHeight="14.0" prefWidth="119.0" />
+            <ChoiceBox fx:id="userRight" opacity="0.9" prefHeight="25.0" prefWidth="160.0" />
+            <Separator opacity="0.0" prefHeight="13.0" prefWidth="119.0" />
+            <TextField fx:id="userPassword" opacity="0.9" promptText="Password" />
+            </children>
+        </VBox>
+        <HBox layoutX="442.0" layoutY="230.0" prefHeight="33.0" prefWidth="289.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#handleAdd" opacity="0.64" prefHeight="36.0" prefWidth="74.0" text="Add" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
+                <Button mnemonicParsing="false" onAction="#handleUpdate" opacity="0.64" prefHeight="33.0" prefWidth="74.0" text="Update" />
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="20.0" />
+                <Button mnemonicParsing="false" onAction="#handleDelete" opacity="0.64" prefHeight="36.0" prefWidth="74.0" text="Delete" />
+            </children>
+        </HBox>
+        <Button layoutX="442.0" layoutY="298.0" mnemonicParsing="false" onAction="#handleClear" opacity="0.64" prefHeight="33.0" prefWidth="74.0" text="Clear" />
+        <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Icons/back.png" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="132.0" fitWidth="158.0" layoutX="442.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Icons/siglaUBB_gif.gif" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>

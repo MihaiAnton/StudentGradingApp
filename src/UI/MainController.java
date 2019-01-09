@@ -33,7 +33,7 @@ public class MainController {
     private TeacherService teacherService;
     private SecurityService securityService;
     private ReportService reportService;
-    private Stage studentStage, homeworkStage, gradesStage, reportStage, googleLoginStage;
+    private Stage studentStage, homeworkStage, gradesStage, reportStage, googleLoginStage, userAdminStage;
     private GradesViewController gradesViewController;
 
     private Stage thisStage;
@@ -41,7 +41,7 @@ public class MainController {
     private Clock clock;
 
     @FXML
-    private ImageView lockPic;
+    private ImageView lockPic, userAdminImage;
 
     @FXML
     private Text loginStatus,clockText;
@@ -171,6 +171,7 @@ public class MainController {
             }
 
             try{
+                //report stage init
                 this.reportStage = new Stage();
                 FXMLLoader reportLoader = new FXMLLoader(getClass().getResource("ReportsFXMLView.fxml"));
                 Pane reportPane = reportLoader.load();
@@ -184,7 +185,25 @@ public class MainController {
                 reportStage.initStyle(StageStyle.UNDECORATED);
             }
             catch(Exception e){
+                System.out.println(e.getMessage());
+            }
 
+            try{
+                //users stage init
+                this.userAdminStage = new Stage();
+                FXMLLoader userAdminLoader = new FXMLLoader(getClass().getResource("UserFXMLView.fxml"));
+                Pane userAdminPane = userAdminLoader.load();
+                UserViewController userViewController = userAdminLoader.getController();
+                userViewController.setSecurityService(securityService);
+                userViewController.setService(teacherService);
+
+
+                userAdminStage.setScene(new Scene(userAdminPane));
+                userViewController.setStage(userAdminStage);
+                userAdminStage.initStyle(StageStyle.UNDECORATED);
+            }
+            catch(Exception e){
+                System.out.println(e.getMessage());
             }
 
             clock = new Clock(this.clockText);
@@ -196,10 +215,22 @@ public class MainController {
             securityService.logIn("admin@cs.ubbcluj.ro","admin1234");
             this.securityService.notifyObserver(new SecurityEvent(null,"security"));
             this.logBtn.setText("Logout");
+            hideAdminFeatures(false);
 
 
         }
         catch(Exception e){}
+    }
+
+    @FXML
+    public void openUserAdminScene(){
+        if(securityService.getAccesRight().equals(ADMIN)){
+            this.userAdminStage.show();
+        }
+        else{
+            handleError("Log in as ADMIN to acces this menu.");
+        }
+
     }
 
     @FXML
@@ -263,6 +294,17 @@ public class MainController {
         this.quitStage();
     }
 
+    private void hideAdminFeatures(boolean hide){
+        if(hide){
+            this.userAdminImage.setDisable(true);
+            this.userAdminImage.setOpacity(0);
+        }
+        else{
+            this.userAdminImage.setDisable(false);
+            this.userAdminImage.setOpacity(1);
+        }
+    }
+
 
     ////////////////security controls
     @FXML
@@ -280,6 +322,10 @@ public class MainController {
                 handleConfirmation("Logged in as " + name + ".", "Login confirmation");
                 this.securityService.notifyObserver(new SecurityEvent(null, "security"));
 
+                if(this.securityService.getAccesRight().equals(ADMIN)){
+                    hideAdminFeatures(false);
+                }
+
             } catch (SecurityException e) {
                 handleError(e.getMessage());
             } catch (Exception e) {
@@ -289,6 +335,7 @@ public class MainController {
         else{
             try{
                 securityService.logOut();
+                hideAdminFeatures(true);
                 this.logBtn.setText("Login");
                 loginStatusText = "Not logged in.";
                 initSecurityFeatures();
