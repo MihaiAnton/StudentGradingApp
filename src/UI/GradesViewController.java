@@ -12,10 +12,9 @@ import Utils.Events.Event;
 import Utils.Events.SecurityEvent;
 import Utils.Events.ServiceEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -44,6 +43,18 @@ public class GradesViewController extends TemplateController<Grade>{
 
     @FXML
     TextField students, hid, week, fback, grade;
+
+    @FXML
+    Button gradeBtn;
+
+    @FXML
+    VBox vboxGrading,vboxLabels;
+
+    @FXML
+    ImageView googleLoginIcon;
+
+    @FXML
+    Text assignGradeLabel;
 
     private SecurityService securityService;
     private LoginController mailLogin;
@@ -151,12 +162,58 @@ public class GradesViewController extends TemplateController<Grade>{
         this.controllerModel.clear();
     }
 
+    private void hideGradeFeatures(boolean hide){
+        if(hide){
+            gradeBtn.setDisable(true);
+            gradeBtn.setOpacity(0);
+            missingReason.setOpacity(0);
+            mailCheck.setOpacity(0);
+            students.setOpacity(0);
+            hid.setOpacity(0);
+            week.setOpacity(0);
+            fback.setOpacity(0);
+            grade.setOpacity(0);
+            vboxGrading.setOpacity(0);
+            vboxLabels.setOpacity(0);
+            googleLoginIcon.setDisable(true);
+            googleLoginIcon.setOpacity(0);
+            assignGradeLabel.setOpacity(0);
+            students.setDisable(true);
+
+        }
+        else{
+            gradeBtn.setDisable(false);
+            gradeBtn.setOpacity(1);
+            missingReason.setOpacity(1);
+            mailCheck.setOpacity(1);
+            students.setOpacity(1);
+            hid.setOpacity(1);
+            week.setOpacity(1);
+            fback.setOpacity(1);
+            grade.setOpacity(1);
+            vboxGrading.setOpacity(1);
+            vboxLabels.setOpacity(1);
+            googleLoginIcon.setDisable(false);
+            googleLoginIcon.setOpacity(1);
+            assignGradeLabel.setOpacity(1);
+            students.setDisable(false);
+        }
+
+    }
+
     @Override
     public void notify(Event event) {
 
         setChoices();
         if(event.getEventType().equals("security")) {
             SecurityEvent se = (SecurityEvent) event;
+
+            if(securityService.getAccesRight().equals(RESTRICTED)){
+                hideGradeFeatures(true);
+            }
+            else{
+                hideGradeFeatures(false);
+            }
 
             loginStatus.setText(securityService.getLogStatus());
         }

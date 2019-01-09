@@ -87,17 +87,17 @@
             </image>
         </ImageView>
         <Text fx:id="loginStatus" fill="#89a1c3" fontSmoothingType="LCD" layoutX="27.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="154.0" />
-      <Text fill="#4496e8" layoutX="259.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign a grade" wrappingWidth="154.0">
+      <Text fx:id="assignGradeLabel" fill="#4496e8" layoutX="259.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign a grade" wrappingWidth="154.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <ImageView fitHeight="61.0" fitWidth="48.0" layoutX="365.0" layoutY="422.0" onMouseClicked="#handleLogin" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="googleLoginIcon" fitHeight="61.0" fitWidth="48.0" layoutX="365.0" layoutY="422.0" onMouseClicked="#handleLogin" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/G.png" />
          </image>
       </ImageView>
-      <VBox layoutX="14.0" layoutY="319.0" prefHeight="167.0" prefWidth="100.0">
+      <VBox fx:id="vboxLabels" layoutX="14.0" layoutY="319.0" prefHeight="167.0" prefWidth="100.0">
          <children>
             <Label text="           Name:" textAlignment="RIGHT" textFill="#98cae4">
                <font>
@@ -130,7 +130,7 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="122.0" layoutY="319.0" prefHeight="167.0" prefWidth="100.0">
+      <VBox fx:id="vboxGrading" layoutX="122.0" layoutY="319.0" prefHeight="167.0" prefWidth="100.0">
          <children>
             <TextField fx:id="students" onKeyTyped="#filterOnWriteGrade" opacity="0.9" prefHeight="0.0" prefWidth="100.0" promptText="Name" />
             <Separator opacity="0.0" prefHeight="12.0" prefWidth="100.0" />
@@ -150,7 +150,7 @@
             <RadioButton fx:id="missingReason" mnemonicParsing="false" text="Missing reason" textFill="#98cae4" />
          </children>
       </VBox>
-      <Button layoutX="259.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#handleGrade" opacity="0.8" prefHeight="44.0" prefWidth="82.0" text="Grade" />
+      <Button fx:id="gradeBtn" layoutX="259.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#handleGrade" opacity="0.8" prefHeight="44.0" prefWidth="82.0" text="Grade" />
 
     </children>
 </AnchorPane>
