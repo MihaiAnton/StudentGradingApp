@@ -252,47 +252,46 @@ public class ReportsViewController extends TemplateController<String>{
 
     @FXML
     public void handleFileChoose(ActionEvent actionEvent) {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("pdf", ".pdf"),
+                    new FileChooser.ExtensionFilter("text", ".txt")
+            );
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("pdf",".pdf"),
-                new FileChooser.ExtensionFilter("text",".txt")
-        );
-
-        Stage chooseStage = new Stage();
-        File file = fileChooser.showSaveDialog(chooseStage);
+            Stage chooseStage = new Stage();
+            File file = fileChooser.showSaveDialog(chooseStage);
 
 
+            String path = file.toString();
 
-        String path = file.toString();
+            int reportCode = 0;
+            if (this.studGrades.isSelected()) reportCode |= 1;
+            if (this.hardesHw.isSelected()) reportCode |= 2;
+            if (this.examableStuds.isSelected()) reportCode |= 4;
+            if (this.ontimeStuds.isSelected()) reportCode |= 8;
+            if (this.groupAvg.isSelected()) reportCode |= 16;
 
-        int reportCode = 0;
-        if(this.studGrades.isSelected()) reportCode |= 1;
-        if(this.hardesHw.isSelected()) reportCode |= 2;
-        if(this.examableStuds.isSelected()) reportCode |= 4;
-        if(this.ontimeStuds.isSelected()) reportCode |= 8;
-        if(this.groupAvg.isSelected()) reportCode |= 16;
-
-        //System.out.println(file.toString());
-        if(path.matches(".*txt")){
-            //System.out.println("txt");
-            try{
-                this.reportsService.createTxtReport(path,"", reportCode);
-                reportConfirmation("Report created successfully.");
-            }
-            catch(Exception e){
-                handleError("Error generating report.");
-            }
-        }
-        else if(path.matches(".*pdf")){
-            //System.out.println("pdf");
-            try {
-                this.reportsService.createPDFReport(path, "", reportCode);
-                reportConfirmation("Report created successfully.");
-            } catch (Exception e) {
-                handleError("Error generating report.");
+            //System.out.println(file.toString());
+            if (path.matches(".*txt")) {
+                //System.out.println("txt");
+                try {
+                    this.reportsService.createTxtReport(path, "", reportCode);
+                    reportConfirmation("Report created successfully.");
+                } catch (Exception e) {
+                    handleError("Error generating report.");
+                }
+            } else if (path.matches(".*pdf")) {
+                //System.out.println("pdf");
+                try {
+                    this.reportsService.createPDFReport(path, "", reportCode);
+                    reportConfirmation("Report created successfully.");
+                } catch (Exception e) {
+                    handleError("Error generating report.");
+                }
             }
         }
+        catch(Exception e){}
 
     }
 }
