@@ -6,6 +6,7 @@ import Utils.Events.Event;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
@@ -16,8 +17,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.Map;
 
 public class ReportsViewController extends TemplateController<String>{
@@ -215,6 +218,7 @@ public class ReportsViewController extends TemplateController<String>{
         else if(this.txtRB.isSelected()){
             try{
                 this.reportsService.createTxtReport(name.getText() + ".txt",locationTF.getText(), reportCode);
+                reportConfirmation("Report '" + name.getText() + "' created successfully.");
             }
             catch(Exception e){
                 handleError("Error generating report.");
@@ -244,5 +248,44 @@ public class ReportsViewController extends TemplateController<String>{
         if(showMoreActivated){
             handleShowMore();
         }
+    }
+
+    @FXML
+    public void handleFileChoose(ActionEvent actionEvent) {
+
+        FileChooser fileChooser = new FileChooser();
+        Stage chooseStage = new Stage();
+        File file = fileChooser.showSaveDialog(chooseStage);
+
+        String path = file.toString();
+
+        int reportCode = 0;
+        if(this.studGrades.isSelected()) reportCode |= 1;
+        if(this.hardesHw.isSelected()) reportCode |= 2;
+        if(this.examableStuds.isSelected()) reportCode |= 4;
+        if(this.ontimeStuds.isSelected()) reportCode |= 8;
+        if(this.groupAvg.isSelected()) reportCode |= 16;
+
+        //System.out.println(file.toString());
+        if(path.matches(".*txt")){
+            //System.out.println("txt");
+            try{
+                this.reportsService.createTxtReport(path,"", reportCode);
+                reportConfirmation("Report created successfully.");
+            }
+            catch(Exception e){
+                handleError("Error generating report.");
+            }
+        }
+        else if(path.matches(".*pdf")){
+            //System.out.println("pdf");
+            try {
+                this.reportsService.createPDFReport(path, "", reportCode);
+                reportConfirmation("Report created successfully.");
+            } catch (Exception e) {
+                handleError("Error generating report.");
+            }
+        }
+
     }
 }

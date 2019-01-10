@@ -33,8 +33,8 @@
         </columns>
       </TableView>
       <RadioButton fx:id="groupAvg" layoutX="75.0" layoutY="222.0" mnemonicParsing="false" selected="true" text="Average grade for each group" textFill="#b9c6d3" />
-      <RadioButton fx:id="pdfRB" layoutX="511.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#pdfRadioButtonSelect" selected="true" text="PDF" textFill="#b9c6d3" />
-      <RadioButton fx:id="txtRB" layoutX="598.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#txtRadioButtonSelect" text="Text" textFill="#b9c6d3" />
+      <RadioButton fx:id="pdfRB" layoutX="495.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#pdfRadioButtonSelect" selected="true" text="PDF" textFill="#b9c6d3" />
+      <RadioButton fx:id="txtRB" layoutX="571.0" layoutY="201.0" mnemonicParsing="false" onMouseClicked="#txtRadioButtonSelect" text="Text" textFill="#b9c6d3" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="301.0" layoutY="65.0" onMouseClicked="#handleGenerateReport" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/reportClick.png" />
@@ -62,5 +62,6 @@
          </children>
       </StackPane>
       <ChoiceBox fx:id="chartChoices" layoutX="75.0" layoutY="383.0" onAction="#handleChangeChart" onMouseClicked="#handleChangeChart" opacity="0.8" prefWidth="150.0" />
+      <Button layoutX="660.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleFileChoose" opacity="0.8" text="Pick a file" />
       </children>
 </AnchorPane>
