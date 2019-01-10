@@ -3,6 +3,7 @@ package UI;
 import Service.ReportService;
 import Service.SecurityService;
 import Utils.Events.Event;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -109,6 +110,7 @@ public class ReportsViewController extends TemplateController<String>{
                 for (String key:passed.keySet()) {
                     list.add(new PieChart.Data(key, passed.get(key)));
                 }
+                list.add(new PieChart.Data("",0));
                 updatePieChart("Students passed", list);
             }
             else if(s.equals("Grades distribution")){
@@ -142,8 +144,8 @@ public class ReportsViewController extends TemplateController<String>{
 
         reportPC.setLabelsVisible(false);
 
+
         reportPC.setLegendSide(Side.LEFT);
-        reportPC.setLabelLineLength(5);
         reportPC.setLegendVisible(true);
 
     }
