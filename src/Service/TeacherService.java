@@ -483,7 +483,7 @@ o ”Feedback:” aprecieri, sugestii, precizări în legătură cu depunctăril
         }
 
         passedStatus.put("Passed", passed);
-        passedStatus.put("Not passed",notPassed);
+        passedStatus.put("Failed",notPassed);
 
 
         return passedStatus;

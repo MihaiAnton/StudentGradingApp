@@ -91,10 +91,11 @@
             <Image url="@Icons/pass2.png" />
          </image>
       </ImageView>
-      <ImageView onMouseClicked="#openUserAdminScene" fx:id="userAdminImage" fitHeight="108.0" fitWidth="125.0" layoutX="440.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="userAdminImage" fitHeight="87.0" fitWidth="97.0" layoutX="450.0" layoutY="17.0" onMouseClicked="#openUserAdminScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/userAdmin.png" />
          </image>
       </ImageView>
+      <Button layoutX="440.0" fx:id="userAdminButton" onAction="#openUserAdminScene" layoutY="105.0" mnemonicParsing="false" opacity="0.64" prefHeight="31.0" prefWidth="107.0" text="User gestion" />
         </children>
 </AnchorPane>

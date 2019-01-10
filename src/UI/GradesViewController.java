@@ -176,6 +176,7 @@ public class GradesViewController extends TemplateController<Grade>{
 
     private void hideGradeFeatures(boolean hide){
         if(hide){
+            assignGradeButton.setText("Assign grades");
             gradeBtn.setDisable(true);
             gradeBtn.setOpacity(0);
             missingReason.setOpacity(0);
@@ -195,6 +196,7 @@ public class GradesViewController extends TemplateController<Grade>{
 
         }
         else{
+            assignGradeButton.setText("Close grading");
             gradeBtn.setDisable(false);
             gradeBtn.setOpacity(1);
             missingReason.setOpacity(1);

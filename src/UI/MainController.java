@@ -53,7 +53,7 @@ public class MainController {
     private PasswordField password;
 
     @FXML
-    private Button logBtn;
+    private Button logBtn,userAdminButton;
 
     String loginStatusText;
 
@@ -300,10 +300,14 @@ public class MainController {
         if(hide){
             this.userAdminImage.setDisable(true);
             this.userAdminImage.setOpacity(0);
+            this.userAdminButton.setDisable(true);
+            this.userAdminButton.setOpacity(0);
         }
         else{
             this.userAdminImage.setDisable(false);
             this.userAdminImage.setOpacity(1);
+            this.userAdminButton.setDisable(false);
+            this.userAdminButton.setOpacity(1);
         }
     }
 
