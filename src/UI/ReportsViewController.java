@@ -254,8 +254,15 @@ public class ReportsViewController extends TemplateController<String>{
     public void handleFileChoose(ActionEvent actionEvent) {
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("pdf",".pdf"),
+                new FileChooser.ExtensionFilter("text",".txt")
+        );
+
         Stage chooseStage = new Stage();
         File file = fileChooser.showSaveDialog(chooseStage);
+
+
 
         String path = file.toString();
 

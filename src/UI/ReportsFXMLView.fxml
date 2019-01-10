@@ -40,11 +40,6 @@
             <Image url="@Icons/reportClick.png" />
          </image>
       </ImageView>
-      <Text fill="#4ba2e4" layoutX="324.0" layoutY="241.0" onMouseClicked="#handleGenerateReport" strokeType="OUTSIDE" strokeWidth="0.0" text="GENERATE" textAlignment="CENTER">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
       <ImageView fitHeight="61.0" fitWidth="77.0" layoutX="725.0" layoutY="425.0" onMouseClicked="#quitStage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Icons/back.png" />
@@ -63,5 +58,6 @@
       </StackPane>
       <ChoiceBox fx:id="chartChoices" layoutX="75.0" layoutY="383.0" onAction="#handleChangeChart" onMouseClicked="#handleChangeChart" opacity="0.8" prefWidth="150.0" />
       <Button layoutX="660.0" layoutY="200.0" mnemonicParsing="false" onAction="#handleFileChoose" opacity="0.8" text="Pick a file" />
+      <Button onAction="#handleGenerateReport" layoutX="325.0" layoutY="217.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #4ba2e4;" text="Generate" textFill="WHITE" />
       </children>
 </AnchorPane>
